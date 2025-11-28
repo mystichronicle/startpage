@@ -6,17 +6,56 @@ A modern, dark-themed browser startpage featuring a sleek Catppuccin Mocha color
 
 ## ✨ Features
 
-- **Dark Catppuccin Mocha Theme** - Easy on the eyes with a beautiful color palette
+- **Catppuccin Themes** - Mocha (dark) and Latte (light) color palettes
 - **Glassmorphism UI** - Modern frosted glass effects with ambient glows
 - **Multi-Engine Search** - Quick switch between Google, DuckDuckGo, GitHub, and YouTube
 - **Dynamic Greeting** - Personalized time-based greetings with sunrise/sun/sunset/moon icons
 - **Quick Links** - Categorized bookmarks (Development, Social, Media, Productivity)
-- **Weather Widget** - Current weather in Fahrenheit
+- **Weather Widget** - Current weather with °F/°C toggle
+- **Settings Panel** - Toggle 12hr/24hr clock, temperature units, and theme
 - **Inspirational Quotes** - Random quotes to brighten your day
 - **Keyboard Navigation** - Fast access with keyboard shortcuts
 - **Responsive Design** - Works on all screen sizes
 
-## 🚀 Installation
+---
+
+## 🧩 Browser Extension Installation
+
+### Chrome / Chromium-based browsers (Edge, Brave, Arc, etc.)
+
+1. Open `chrome://extensions/` in your browser
+2. Enable **Developer mode** (toggle in top-right corner)
+3. Click **Load unpacked**
+4. Select the `startpage` folder
+5. Open a new tab to see your startpage!
+
+### Firefox
+
+1. Open `about:debugging#/runtime/this-firefox`
+2. Click **Load Temporary Add-on...**
+3. Select the `manifest.json` file from the `startpage` folder
+4. Open a new tab to see your startpage!
+
+> **Note for Firefox**: For permanent installation, you'll need to:
+> - Sign the extension at [addons.mozilla.org](https://addons.mozilla.org)
+> - Or use Firefox Developer Edition with `xpinstall.signatures.required` set to `false`
+
+### Creating Extension Icons
+
+The extension needs PNG icons. Generate them from the included `icons/icon.svg`:
+
+```bash
+# Using ImageMagick
+for size in 16 32 48 128; do
+  magick -background none icons/icon.svg -resize ${size}x${size} icons/icon${size}.png
+done
+```
+
+Or use an online converter like [CloudConvert](https://cloudconvert.com/svg-to-png).
+
+---
+
+## 🚀 Standalone Installation
 
 ### Clone the Repository
 

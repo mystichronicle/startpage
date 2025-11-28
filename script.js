@@ -2,6 +2,26 @@
 // Modern Dark Startpage JavaScript
 // ========================================
 
+// ========================================
+// Settings Configuration
+// ========================================
+
+const settings = {
+    timeFormat: localStorage.getItem('timeFormat') || '12',
+    tempUnit: localStorage.getItem('tempUnit') || 'F',
+    theme: localStorage.getItem('theme') || 'dark'
+};
+
+// Apply theme on load
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    settings.theme = theme;
+    localStorage.setItem('theme', theme);
+}
+
+// Apply saved theme immediately
+applyTheme(settings.theme);
+
 // Search Engine Configuration
 const searchEngines = {
     google: {
@@ -45,10 +65,20 @@ const engineButtons = document.querySelectorAll('.engine');
 function updateDateTime() {
     const now = new Date();
     
-    // Format time (24-hour)
-    const hours = now.getHours().toString().padStart(2, '0');
+    // Format time based on setting
+    let hours = now.getHours();
     const minutes = now.getMinutes().toString().padStart(2, '0');
-    timeElement.textContent = `${hours}:${minutes}`;
+    let timeString;
+    
+    if (settings.timeFormat === '12') {
+        const period = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        timeString = `${hours}:${minutes} ${period}`;
+    } else {
+        timeString = `${hours.toString().padStart(2, '0')}:${minutes}`;
+    }
+    
+    timeElement.textContent = timeString;
     
     // Format date
     const options = { 
@@ -125,15 +155,26 @@ function updateWeather() {
     // Example with OpenWeatherMap: https://api.openweathermap.org/data/2.5/weather
     
     const mockWeatherData = [
-        { temp: 72, condition: 'Partly Cloudy', icon: '󰖐' },
-        { temp: 64, condition: 'Cloudy', icon: '' },
-        { temp: 77, condition: 'Sunny', icon: '' },
-        { temp: 59, condition: 'Rainy', icon: '' },
-        { temp: 68, condition: 'Clear', icon: '' }
+        { tempF: 72, condition: 'Partly Cloudy', icon: '󰖐' },
+        { tempF: 64, condition: 'Cloudy', icon: '' },
+        { tempF: 77, condition: 'Sunny', icon: '' },
+        { tempF: 59, condition: 'Rainy', icon: '' },
+        { tempF: 68, condition: 'Clear', icon: '' }
     ];
     
     const weather = mockWeatherData[Math.floor(Math.random() * mockWeatherData.length)];
-    weatherElement.textContent = `${weather.temp}°F ${weather.condition}`;
+    
+    // Convert temperature based on setting
+    let temp, unit;
+    if (settings.tempUnit === 'C') {
+        temp = Math.round((weather.tempF - 32) * 5 / 9);
+        unit = '°C';
+    } else {
+        temp = weather.tempF;
+        unit = '°F';
+    }
+    
+    weatherElement.textContent = `${temp}${unit} ${weather.condition}`;
     weatherElement.previousElementSibling.textContent = weather.icon;
 }
 
@@ -269,10 +310,83 @@ function init() {
     // Initialize event listeners
     initEventListeners();
     
+    // Initialize settings
+    initSettings();
+    
     // Focus search input after a brief delay (for animation)
     setTimeout(() => {
         searchInput.focus();
     }, 700);
+}
+
+// ========================================
+// Settings Modal Functions
+// ========================================
+
+function initSettings() {
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsOverlay = document.getElementById('settings-overlay');
+    const settingsClose = document.getElementById('settings-close');
+    const toggleBtns = document.querySelectorAll('.toggle-btn');
+    
+    // Open settings
+    settingsBtn.addEventListener('click', () => {
+        settingsOverlay.classList.add('active');
+    });
+    
+    // Close settings
+    settingsClose.addEventListener('click', () => {
+        settingsOverlay.classList.remove('active');
+    });
+    
+    // Close on overlay click
+    settingsOverlay.addEventListener('click', (e) => {
+        if (e.target === settingsOverlay) {
+            settingsOverlay.classList.remove('active');
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && settingsOverlay.classList.contains('active')) {
+            settingsOverlay.classList.remove('active');
+        }
+    });
+    
+    // Update toggle button states based on saved settings
+    updateToggleStates();
+    
+    // Handle toggle button clicks
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const setting = btn.dataset.setting;
+            const value = btn.dataset.value;
+            
+            // Update setting
+            settings[setting] = value;
+            localStorage.setItem(setting, value);
+            
+            // Update UI
+            updateToggleStates();
+            
+            // Apply changes
+            if (setting === 'theme') {
+                applyTheme(value);
+            } else if (setting === 'timeFormat') {
+                updateDateTime();
+            } else if (setting === 'tempUnit') {
+                updateWeather();
+            }
+        });
+    });
+}
+
+function updateToggleStates() {
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        const setting = btn.dataset.setting;
+        const value = btn.dataset.value;
+        btn.classList.toggle('active', settings[setting] === value);
+    });
 }
 
 // ========================================

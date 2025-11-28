@@ -23,11 +23,60 @@
                 <span class="icon" id="greeting-icon"><i class="fa-solid fa-sun"></i></span>
                 <span class="greeting-text" id="greeting">Good evening, Bryan</span>
             </div>
-            <div class="datetime">
-                <span class="time" id="time">00:00</span>
-                <span class="date" id="date">Thursday, Nov 28</span>
+            <div class="header-right">
+                <div class="datetime">
+                    <span class="time" id="time">00:00</span>
+                    <span class="date" id="date">Thursday, Nov 28</span>
+                </div>
+                <button class="settings-btn" id="settings-btn" title="Settings">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
             </div>
         </header>
+
+        <!-- Settings Modal -->
+        <div class="settings-overlay" id="settings-overlay">
+            <div class="settings-modal">
+                <div class="settings-header">
+                    <h3><i class="fa-solid fa-gear"></i> Settings</h3>
+                    <button class="settings-close" id="settings-close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="settings-body">
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Time Format</span>
+                        </div>
+                        <div class="setting-toggle">
+                            <button class="toggle-btn" data-setting="timeFormat" data-value="12">12hr</button>
+                            <button class="toggle-btn" data-setting="timeFormat" data-value="24">24hr</button>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <i class="fa-solid fa-temperature-half"></i>
+                            <span>Temperature</span>
+                        </div>
+                        <div class="setting-toggle">
+                            <button class="toggle-btn" data-setting="tempUnit" data-value="F">°F</button>
+                            <button class="toggle-btn" data-setting="tempUnit" data-value="C">°C</button>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <i class="fa-solid fa-palette"></i>
+                            <span>Theme</span>
+                        </div>
+                        <div class="setting-toggle">
+                            <button class="toggle-btn" data-setting="theme" data-value="dark"><i class="fa-solid fa-moon"></i> Dark</button>
+                            <button class="toggle-btn" data-setting="theme" data-value="light"><i class="fa-solid fa-sun"></i> Light</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Search Bar -->
         <div class="search-container">
@@ -46,7 +95,7 @@
         <!-- Quick Links Grid -->
         <main class="links-grid">
             <!-- Development -->
-            <section class="link-group">
+            <section class="link-group" data-category="development">
                 <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-code"></i></span>Development</h2>
                 <div class="links">
                     <a href="https://github.com" class="link-card">
@@ -77,7 +126,7 @@
             </section>
 
             <!-- Social -->
-            <section class="link-group">
+            <section class="link-group" data-category="social">
                 <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-users"></i></span>Social</h2>
                 <div class="links">
                     <a href="https://reddit.com" class="link-card">
@@ -108,7 +157,7 @@
             </section>
 
             <!-- Media -->
-            <section class="link-group">
+            <section class="link-group" data-category="media">
                 <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-play"></i></span>Media</h2>
                 <div class="links">
                     <a href="https://youtube.com" class="link-card">
@@ -139,7 +188,7 @@
             </section>
 
             <!-- Productivity -->
-            <section class="link-group">
+            <section class="link-group" data-category="productivity">
                 <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-briefcase"></i></span>Productivity</h2>
                 <div class="links">
                     <a href="https://notion.so" class="link-card">
