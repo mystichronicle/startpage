@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startpage</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Ambient background effects -->
+        <div class="ambient-bg">
+            <div class="glow glow-1"></div>
+            <div class="glow glow-2"></div>
+            <div class="glow glow-3"></div>
+        </div>
+
+        <!-- Header with greeting and time -->
+        <header class="header">
+            <div class="greeting">
+                <span class="icon" id="greeting-icon"><i class="fa-solid fa-sun"></i></span>
+                <span class="greeting-text" id="greeting">Good evening, Bryan</span>
+            </div>
+            <div class="datetime">
+                <span class="time" id="time">00:00</span>
+                <span class="date" id="date">Thursday, Nov 28</span>
+            </div>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="text" id="search" placeholder="Search the web..." autocomplete="off" autofocus>
+                <div class="search-engines">
+                    <button class="engine active" data-engine="google" title="Google"><i class="fa-brands fa-google"></i></button>
+                    <button class="engine" data-engine="duckduckgo" title="DuckDuckGo"><span class="nf-icon">󰇥</span></button>
+                    <button class="engine" data-engine="github" title="GitHub"><i class="fa-brands fa-github"></i></button>
+                    <button class="engine" data-engine="youtube" title="YouTube"><i class="fa-brands fa-youtube"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links Grid -->
+        <main class="links-grid">
+            <!-- Development -->
+            <section class="link-group">
+                <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-code"></i></span>Development</h2>
+                <div class="links">
+                    <a href="https://github.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-github"></i></span>
+                        <span class="link-text">GitHub</span>
+                    </a>
+                    <a href="https://gitlab.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-gitlab"></i></span>
+                        <span class="link-text">GitLab</span>
+                    </a>
+                    <a href="https://stackoverflow.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-stack-overflow"></i></span>
+                        <span class="link-text">Stack Overflow</span>
+                    </a>
+                    <a href="https://codepen.io" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-codepen"></i></span>
+                        <span class="link-text">CodePen</span>
+                    </a>
+                    <a href="https://vercel.com" class="link-card">
+                        <span class="link-icon"><i class="fa-solid fa-v"></i></span>
+                        <span class="link-text">Vercel</span>
+                    </a>
+                    <a href="https://docker.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-docker"></i></span>
+                        <span class="link-text">Docker</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Social -->
+            <section class="link-group">
+                <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-users"></i></span>Social</h2>
+                <div class="links">
+                    <a href="https://reddit.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-reddit-alien"></i></span>
+                        <span class="link-text">Reddit</span>
+                    </a>
+                    <a href="https://twitter.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-x-twitter"></i></span>
+                        <span class="link-text">Twitter</span>
+                    </a>
+                    <a href="https://discord.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-discord"></i></span>
+                        <span class="link-text">Discord</span>
+                    </a>
+                    <a href="https://linkedin.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-linkedin"></i></span>
+                        <span class="link-text">LinkedIn</span>
+                    </a>
+                    <a href="https://mastodon.social" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-mastodon"></i></span>
+                        <span class="link-text">Mastodon</span>
+                    </a>
+                    <a href="https://twitch.tv" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-twitch"></i></span>
+                        <span class="link-text">Twitch</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Media -->
+            <section class="link-group">
+                <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-play"></i></span>Media</h2>
+                <div class="links">
+                    <a href="https://youtube.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-youtube"></i></span>
+                        <span class="link-text">YouTube</span>
+                    </a>
+                    <a href="https://spotify.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-spotify"></i></span>
+                        <span class="link-text">Spotify</span>
+                    </a>
+                    <a href="https://netflix.com" class="link-card">
+                        <span class="link-icon"><i class="fa-solid fa-film"></i></span>
+                        <span class="link-text">Netflix</span>
+                    </a>
+                    <a href="https://soundcloud.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-soundcloud"></i></span>
+                        <span class="link-text">SoundCloud</span>
+                    </a>
+                    <a href="https://primevideo.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-amazon"></i></span>
+                        <span class="link-text">Prime Video</span>
+                    </a>
+                    <a href="https://plex.tv" class="link-card">
+                        <span class="link-icon"><i class="fa-solid fa-circle-play"></i></span>
+                        <span class="link-text">Plex</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Productivity -->
+            <section class="link-group">
+                <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-briefcase"></i></span>Productivity</h2>
+                <div class="links">
+                    <a href="https://notion.so" class="link-card">
+                        <span class="link-icon"><i class="fa-solid fa-book"></i></span>
+                        <span class="link-text">Notion</span>
+                    </a>
+                    <a href="https://mail.google.com" class="link-card">
+                        <span class="link-icon"><i class="fa-solid fa-envelope"></i></span>
+                        <span class="link-text">Gmail</span>
+                    </a>
+                    <a href="https://calendar.google.com" class="link-card">
+                        <span class="link-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                        <span class="link-text">Calendar</span>
+                    </a>
+                    <a href="https://drive.google.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-google-drive"></i></span>
+                        <span class="link-text">Drive</span>
+                    </a>
+                    <a href="https://trello.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-trello"></i></span>
+                        <span class="link-text">Trello</span>
+                    </a>
+                    <a href="https://figma.com" class="link-card">
+                        <span class="link-icon"><i class="fa-brands fa-figma"></i></span>
+                        <span class="link-text">Figma</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Widget -->
+        <footer class="footer">
+            <div class="widget weather-widget">
+                <span class="widget-icon"><i class="fa-solid fa-cloud-sun"></i></span>
+                <span class="widget-text" id="weather">Loading...</span>
+            </div>
+            <div class="widget quote-widget">
+                <span class="widget-icon"><i class="fa-solid fa-quote-left"></i></span>
+                <span class="widget-text" id="quote">"The only way to do great work is to love what you do."</span>
+            </div>
+        </footer>
+
+        <!-- Keyboard Hints -->
+        <div class="keyboard-hints">
+            <span class="hint"><kbd>/</kbd> Search</span>
+            <span class="hint"><kbd>1-4</kbd> Engine</span>
+            <span class="hint"><kbd>Esc</kbd> Clear</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
