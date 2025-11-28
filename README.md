@@ -1,6 +1,6 @@
-# 🌙 Start Page v3
+# ☕ Sip
 
-A modern, dark-themed browser startpage featuring a sleek Catppuccin Mocha color scheme, glassmorphism effects, and dynamic personalization.
+A cozy new tab page featuring beautiful Catppuccin color themes, glassmorphism effects, and dynamic personalization. Take a sip of serenity with every new tab.
 
 ![Preview](preview.png)
 
@@ -171,10 +171,16 @@ This startpage uses:
 - [Font Awesome 6](https://fontawesome.com/) for most icons
 - [Nerd Fonts](https://www.nerdfonts.com/) for DuckDuckGo duck and time-of-day icons
 
+## 🔒 Privacy
+
+This extension respects your privacy. See our [Privacy Policy](PRIVACY.md) for details.
+
+**TL;DR:** No data collection. All preferences stored locally on your device.
+
 ## 📄 License
 
 MIT License - feel free to modify and use as you wish!
 
 ---
 
-Made with 💜 using Catppuccin Mocha
+Made with ☕ and 💜 using Catppuccin

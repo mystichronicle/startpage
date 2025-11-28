@@ -155,11 +155,14 @@ function updateWeather() {
     // Example with OpenWeatherMap: https://api.openweathermap.org/data/2.5/weather
     
     const mockWeatherData = [
-        { tempF: 72, condition: 'Partly Cloudy', icon: '󰖐' },
-        { tempF: 64, condition: 'Cloudy', icon: '' },
-        { tempF: 77, condition: 'Sunny', icon: '' },
-        { tempF: 59, condition: 'Rainy', icon: '' },
-        { tempF: 68, condition: 'Clear', icon: '' }
+        { tempF: 72, condition: 'Partly Cloudy', icon: 'fa-cloud-sun' },
+        { tempF: 64, condition: 'Cloudy', icon: 'fa-cloud' },
+        { tempF: 77, condition: 'Sunny', icon: 'fa-sun' },
+        { tempF: 59, condition: 'Rainy', icon: 'fa-cloud-rain' },
+        { tempF: 68, condition: 'Clear', icon: 'fa-moon' },
+        { tempF: 45, condition: 'Thunderstorms', icon: 'fa-cloud-bolt' },
+        { tempF: 28, condition: 'Snow', icon: 'fa-snowflake' },
+        { tempF: 55, condition: 'Windy', icon: 'fa-wind' }
     ];
     
     const weather = mockWeatherData[Math.floor(Math.random() * mockWeatherData.length)];
@@ -175,7 +178,12 @@ function updateWeather() {
     }
     
     weatherElement.textContent = `${temp}${unit} ${weather.condition}`;
-    weatherElement.previousElementSibling.textContent = weather.icon;
+    
+    // Update weather icon using Font Awesome
+    const iconElement = weatherElement.previousElementSibling;
+    if (iconElement) {
+        iconElement.innerHTML = `<i class="fa-solid ${weather.icon}"></i>`;
+    }
 }
 
 // ========================================

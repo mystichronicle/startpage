@@ -1,9 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "Catppuccin Startpage",
+  "name": "Sip",
   "version": "1.0.0",
-  "description": "A beautiful, customizable startpage with Catppuccin color themes",
+  "description": "A cozy new tab page with Catppuccin themes, quick links, and customizable settings",
   "author": "Bryan Gibson",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "sip-startpage@bgibson72",
+      "strict_min_version": "109.0"
+    }
+  },
   
   "chrome_url_overrides": {
     "newtab": "index.html"
