@@ -19,39 +19,14 @@ A cozy new tab page featuring beautiful Catppuccin color themes, glassmorphism e
 
 ---
 
-## 🧩 Browser Extension Installation
+## 🧩 Installation
 
-### Chrome / Chromium-based browsers (Edge, Brave, Arc, etc.)
+**Sip** is available as a browser extension:
 
-1. Open `chrome://extensions/` in your browser
-2. Enable **Developer mode** (toggle in top-right corner)
-3. Click **Load unpacked**
-4. Select the `startpage` folder
-5. Open a new tab to see your startpage!
+- **Chrome Web Store** - Coming soon!
+- **Firefox Add-ons** - Coming soon!
 
-### Firefox
-
-1. Open `about:debugging#/runtime/this-firefox`
-2. Click **Load Temporary Add-on...**
-3. Select the `manifest.json` file from the `startpage` folder
-4. Open a new tab to see your startpage!
-
-> **Note for Firefox**: For permanent installation, you'll need to:
-> - Sign the extension at [addons.mozilla.org](https://addons.mozilla.org)
-> - Or use Firefox Developer Edition with `xpinstall.signatures.required` set to `false`
-
-### Creating Extension Icons
-
-The extension needs PNG icons. Generate them from the included `icons/icon.svg`:
-
-```bash
-# Using ImageMagick
-for size in 16 32 48 128; do
-  magick -background none icons/icon.svg -resize ${size}x${size} icons/icon${size}.png
-done
-```
-
-Or use an online converter like [CloudConvert](https://cloudconvert.com/svg-to-png).
+Once published, simply install from your browser's extension store and Sip will replace your new tab page.
 
 ---
 
