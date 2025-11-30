@@ -2,7 +2,7 @@
 
 A cozy new tab page featuring beautiful Catppuccin color themes, glassmorphism effects, and dynamic personalization. Take a sip of serenity with every new tab.
 
-![Preview Image](sip_preview_new.png)
+![Preview Image](sip_preview.png)
 
 <details>
 <summary>📸 Screenshots</summary>
