@@ -29,11 +29,66 @@
                     <span class="time" id="time">00:00</span>
                     <span class="date" id="date">Thursday, Nov 28</span>
                 </div>
-                <button class="settings-btn" id="settings-btn" title="Settings">
-                    <i class="fa-solid fa-gear"></i>
-                </button>
             </div>
         </header>
+
+        <!-- Help Modal -->
+        <div class="help-overlay" id="help-overlay">
+            <div class="help-modal">
+                <div class="help-header">
+                    <h3><i class="fa-solid fa-circle-question"></i> Help</h3>
+                    <button class="help-close" id="help-close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="help-content">
+                    <section class="help-section">
+                        <h4><i class="fa-solid fa-icons"></i> Customizing Icons</h4>
+                        <p>This startpage uses <a href="https://fontawesome.com/search?o=r&m=free" target="_blank">Font Awesome</a> icons. You can customize icons for categories and links in Settings.</p>
+                    </section>
+                    
+                    <section class="help-section">
+                        <h4><i class="fa-solid fa-magnifying-glass"></i> Step 1: Find an Icon</h4>
+                        <ol class="help-steps">
+                            <li>Go to <a href="https://fontawesome.com/search?o=r&m=free" target="_blank">fontawesome.com/search</a></li>
+                            <li>Type a keyword in the search box (e.g., "linux", "music", "cloud")</li>
+                            <li>Click the <strong>"Free"</strong> filter button on the right side to show only free icons</li>
+                            <li>Click on the icon you want to use</li>
+                        </ol>
+                    </section>
+                    
+                    <section class="help-section">
+                        <h4><i class="fa-solid fa-copy"></i> Step 2: Copy the Icon Code</h4>
+                        <ol class="help-steps">
+                            <li>After clicking an icon, a popup will appear</li>
+                            <li>Look for the HTML code that looks like: <code>&lt;i class="fa-brands fa-linux"&gt;&lt;/i&gt;</code></li>
+                            <li>Copy <strong>only the class value</strong> — the part inside the quotes</li>
+                            <li>For example, copy: <code>fa-brands fa-linux</code></li>
+                        </ol>
+                    </section>
+                    
+                    <section class="help-section">
+                        <h4><i class="fa-solid fa-paste"></i> Step 3: Use in Settings</h4>
+                        <ol class="help-steps">
+                            <li>Open Settings <i class="fa-solid fa-gear"></i> and go to the Categories or Links tab</li>
+                            <li>Paste the icon code into the icon field (the first input box)</li>
+                            <li>You'll see a live preview of your icon appear</li>
+                        </ol>
+                    </section>
+                    
+                    <section class="help-section">
+                        <h4><i class="fa-solid fa-lightbulb"></i> Examples</h4>
+                        <ul class="icon-examples">
+                            <li><code>fa-solid fa-code</code> → <i class="fa-solid fa-code"></i> (solid style)</li>
+                            <li><code>fa-brands fa-github</code> → <i class="fa-brands fa-github"></i> (brand logo)</li>
+                            <li><code>fa-solid fa-gamepad</code> → <i class="fa-solid fa-gamepad"></i></li>
+                            <li><code>fa-brands fa-spotify</code> → <i class="fa-brands fa-spotify"></i></li>
+                        </ul>
+                        <p class="help-tip"><strong>Tip:</strong> Use <code>fa-solid</code> for general icons or <code>fa-brands</code> for company/brand logos.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
 
         <!-- Settings Modal -->
         <div class="settings-overlay" id="settings-overlay">
@@ -44,180 +99,189 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
+                
+                <!-- Settings Tabs -->
+                <div class="settings-tabs">
+                    <button class="settings-tab active" data-tab="general">
+                        <i class="fa-solid fa-sliders"></i> General
+                    </button>
+                    <button class="settings-tab" data-tab="categories">
+                        <i class="fa-solid fa-folder"></i> Categories
+                    </button>
+                    <button class="settings-tab" data-tab="links">
+                        <i class="fa-solid fa-link"></i> Links
+                    </button>
+                </div>
+
                 <div class="settings-body">
-                    <div class="setting-item">
-                        <div class="setting-label">
-                            <i class="fa-solid fa-clock"></i>
-                            <span>Time Format</span>
+                    <!-- General Tab -->
+                    <div class="settings-panel active" data-panel="general">
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <i class="fa-solid fa-user"></i>
+                                <span>Your Name</span>
+                            </div>
+                            <input type="text" id="setting-name" class="setting-input" placeholder="Enter your name (optional)" maxlength="20">
                         </div>
-                        <div class="setting-toggle">
-                            <button class="toggle-btn" data-setting="timeFormat" data-value="12">12hr</button>
-                            <button class="toggle-btn" data-setting="timeFormat" data-value="24">24hr</button>
+                        
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <i class="fa-solid fa-palette"></i>
+                                <span>Theme</span>
+                            </div>
+                            <div class="setting-toggle">
+                                <button class="toggle-btn" data-setting="theme" data-value="dark"><i class="fa-solid fa-moon"></i> Dark</button>
+                                <button class="toggle-btn" data-setting="theme" data-value="light"><i class="fa-solid fa-sun"></i> Light</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <i class="fa-solid fa-swatchbook"></i>
+                                <span>Category Colors</span>
+                            </div>
+                            <div class="setting-toggle">
+                                <button class="toggle-btn" data-setting="colorMode" data-value="multi"><i class="fa-solid fa-rainbow"></i> Multi</button>
+                                <button class="toggle-btn" data-setting="colorMode" data-value="single"><i class="fa-solid fa-circle"></i> Single</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <i class="fa-solid fa-clock"></i>
+                                <span>Time Format</span>
+                            </div>
+                            <div class="setting-toggle">
+                                <button class="toggle-btn" data-setting="timeFormat" data-value="12">12hr</button>
+                                <button class="toggle-btn" data-setting="timeFormat" data-value="24">24hr</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <i class="fa-solid fa-temperature-half"></i>
+                                <span>Temperature</span>
+                            </div>
+                            <div class="setting-toggle">
+                                <button class="toggle-btn" data-setting="tempUnit" data-value="F">°F</button>
+                                <button class="toggle-btn" data-setting="tempUnit" data-value="C">°C</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <i class="fa-solid fa-quote-left"></i>
+                                <span>Show Quotes</span>
+                            </div>
+                            <div class="setting-toggle">
+                                <button class="toggle-btn" data-setting="showQuotes" data-value="true"><i class="fa-solid fa-eye"></i> Show</button>
+                                <button class="toggle-btn" data-setting="showQuotes" data-value="false"><i class="fa-solid fa-eye-slash"></i> Hide</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item setting-item-vertical">
+                            <div class="setting-label">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <span>Search Engines</span>
+                            </div>
+                            <div class="search-engine-grid" id="search-engine-options">
+                                <label class="engine-checkbox">
+                                    <input type="checkbox" data-engine="google" checked>
+                                    <span class="engine-icon"><i class="fa-brands fa-google"></i></span>
+                                    <span>Google</span>
+                                </label>
+                                <label class="engine-checkbox">
+                                    <input type="checkbox" data-engine="duckduckgo" checked>
+                                    <span class="engine-icon"><span class="nf-icon">󰇥</span></span>
+                                    <span>DuckDuckGo</span>
+                                </label>
+                                <label class="engine-checkbox">
+                                    <input type="checkbox" data-engine="github" checked>
+                                    <span class="engine-icon"><i class="fa-brands fa-github"></i></span>
+                                    <span>GitHub</span>
+                                </label>
+                                <label class="engine-checkbox">
+                                    <input type="checkbox" data-engine="youtube" checked>
+                                    <span class="engine-icon"><i class="fa-brands fa-youtube"></i></span>
+                                    <span>YouTube</span>
+                                </label>
+                                <label class="engine-checkbox">
+                                    <input type="checkbox" data-engine="bing">
+                                    <span class="engine-icon"><i class="fa-brands fa-microsoft"></i></span>
+                                    <span>Bing</span>
+                                </label>
+                                <label class="engine-checkbox">
+                                    <input type="checkbox" data-engine="amazon">
+                                    <span class="engine-icon"><i class="fa-brands fa-amazon"></i></span>
+                                    <span>Amazon</span>
+                                </label>
+                                <label class="engine-checkbox">
+                                    <input type="checkbox" data-engine="wikipedia">
+                                    <span class="engine-icon"><i class="fa-brands fa-wikipedia-w"></i></span>
+                                    <span>Wikipedia</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div class="setting-item">
-                        <div class="setting-label">
-                            <i class="fa-solid fa-temperature-half"></i>
-                            <span>Temperature</span>
+                    
+                    <!-- Categories Tab -->
+                    <div class="settings-panel" data-panel="categories">
+                        <p class="panel-description">Add up to 8 categories. You can use emoji or text for icons.</p>
+                        <div class="categories-list" id="categories-list">
+                            <!-- Categories will be populated dynamically -->
                         </div>
-                        <div class="setting-toggle">
-                            <button class="toggle-btn" data-setting="tempUnit" data-value="F">°F</button>
-                            <button class="toggle-btn" data-setting="tempUnit" data-value="C">°C</button>
-                        </div>
+                        <button class="add-btn" id="add-category-btn">
+                            <i class="fa-solid fa-plus"></i> Add Category
+                        </button>
                     </div>
-                    <div class="setting-item">
-                        <div class="setting-label">
-                            <i class="fa-solid fa-palette"></i>
-                            <span>Theme</span>
+                    
+                    <!-- Links Tab -->
+                    <div class="settings-panel" data-panel="links">
+                        <p class="panel-description">Select a category, then add up to 10 links.</p>
+                        <div class="category-selector">
+                            <label for="link-category-select">Category:</label>
+                            <select id="link-category-select" class="setting-select">
+                                <option value="">-- Select a category --</option>
+                            </select>
                         </div>
-                        <div class="setting-toggle">
-                            <button class="toggle-btn" data-setting="theme" data-value="dark"><i class="fa-solid fa-moon"></i> Dark</button>
-                            <button class="toggle-btn" data-setting="theme" data-value="light"><i class="fa-solid fa-sun"></i> Light</button>
+                        <div class="links-list" id="links-list">
+                            <!-- Links will be populated dynamically -->
                         </div>
+                        <button class="add-btn" id="add-link-btn" disabled>
+                            <i class="fa-solid fa-plus"></i> Add Link
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Search Bar -->
-        <div class="search-container">
-            <div class="search-box">
-                <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-                <input type="text" id="search" placeholder="Search the web..." autocomplete="off" autofocus>
-                <div class="search-engines">
-                    <button class="engine active" data-engine="google" title="Google"><i class="fa-brands fa-google"></i></button>
-                    <button class="engine" data-engine="duckduckgo" title="DuckDuckGo"><span class="nf-icon">󰇥</span></button>
-                    <button class="engine" data-engine="github" title="GitHub"><i class="fa-brands fa-github"></i></button>
-                    <button class="engine" data-engine="youtube" title="YouTube"><i class="fa-brands fa-youtube"></i></button>
+        <div class="search-row">
+            <div class="search-container">
+                <div class="search-box">
+                    <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" id="search" placeholder="Search the web..." autocomplete="off" autofocus>
+                    <div class="search-engines">
+                        <button class="engine active" data-engine="google" title="Google"><i class="fa-brands fa-google"></i></button>
+                        <button class="engine" data-engine="duckduckgo" title="DuckDuckGo"><span class="nf-icon">󰇥</span></button>
+                        <button class="engine" data-engine="github" title="GitHub"><i class="fa-brands fa-github"></i></button>
+                        <button class="engine" data-engine="youtube" title="YouTube"><i class="fa-brands fa-youtube"></i></button>
+                    </div>
                 </div>
+            </div>
+            <div class="toolbar-btns">
+                <button class="toolbar-btn" id="help-btn" title="Help">
+                    <i class="fa-solid fa-circle-question"></i>
+                </button>
+                <button class="toolbar-btn" id="settings-btn" title="Settings">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
             </div>
         </div>
 
         <!-- Quick Links Grid -->
-        <main class="links-grid">
-            <!-- Development -->
-            <section class="link-group" data-category="development">
-                <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-code"></i></span>Development</h2>
-                <div class="links">
-                    <a href="https://github.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-github"></i></span>
-                        <span class="link-text">GitHub</span>
-                    </a>
-                    <a href="https://gitlab.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-gitlab"></i></span>
-                        <span class="link-text">GitLab</span>
-                    </a>
-                    <a href="https://stackoverflow.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-stack-overflow"></i></span>
-                        <span class="link-text">Stack Overflow</span>
-                    </a>
-                    <a href="https://codepen.io" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-codepen"></i></span>
-                        <span class="link-text">CodePen</span>
-                    </a>
-                    <a href="https://vercel.com" class="link-card">
-                        <span class="link-icon"><i class="fa-solid fa-v"></i></span>
-                        <span class="link-text">Vercel</span>
-                    </a>
-                    <a href="https://docker.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-docker"></i></span>
-                        <span class="link-text">Docker</span>
-                    </a>
-                </div>
-            </section>
-
-            <!-- Social -->
-            <section class="link-group" data-category="social">
-                <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-users"></i></span>Social</h2>
-                <div class="links">
-                    <a href="https://reddit.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-reddit-alien"></i></span>
-                        <span class="link-text">Reddit</span>
-                    </a>
-                    <a href="https://twitter.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-x-twitter"></i></span>
-                        <span class="link-text">Twitter</span>
-                    </a>
-                    <a href="https://discord.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-discord"></i></span>
-                        <span class="link-text">Discord</span>
-                    </a>
-                    <a href="https://linkedin.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-linkedin"></i></span>
-                        <span class="link-text">LinkedIn</span>
-                    </a>
-                    <a href="https://mastodon.social" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-mastodon"></i></span>
-                        <span class="link-text">Mastodon</span>
-                    </a>
-                    <a href="https://twitch.tv" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-twitch"></i></span>
-                        <span class="link-text">Twitch</span>
-                    </a>
-                </div>
-            </section>
-
-            <!-- Media -->
-            <section class="link-group" data-category="media">
-                <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-play"></i></span>Media</h2>
-                <div class="links">
-                    <a href="https://youtube.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-youtube"></i></span>
-                        <span class="link-text">YouTube</span>
-                    </a>
-                    <a href="https://spotify.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-spotify"></i></span>
-                        <span class="link-text">Spotify</span>
-                    </a>
-                    <a href="https://netflix.com" class="link-card">
-                        <span class="link-icon"><i class="fa-solid fa-film"></i></span>
-                        <span class="link-text">Netflix</span>
-                    </a>
-                    <a href="https://soundcloud.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-soundcloud"></i></span>
-                        <span class="link-text">SoundCloud</span>
-                    </a>
-                    <a href="https://primevideo.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-amazon"></i></span>
-                        <span class="link-text">Prime Video</span>
-                    </a>
-                    <a href="https://plex.tv" class="link-card">
-                        <span class="link-icon"><i class="fa-solid fa-circle-play"></i></span>
-                        <span class="link-text">Plex</span>
-                    </a>
-                </div>
-            </section>
-
-            <!-- Productivity -->
-            <section class="link-group" data-category="productivity">
-                <h2 class="group-title"><span class="title-icon"><i class="fa-solid fa-briefcase"></i></span>Productivity</h2>
-                <div class="links">
-                    <a href="https://notion.so" class="link-card">
-                        <span class="link-icon"><i class="fa-solid fa-book"></i></span>
-                        <span class="link-text">Notion</span>
-                    </a>
-                    <a href="https://mail.google.com" class="link-card">
-                        <span class="link-icon"><i class="fa-solid fa-envelope"></i></span>
-                        <span class="link-text">Gmail</span>
-                    </a>
-                    <a href="https://calendar.google.com" class="link-card">
-                        <span class="link-icon"><i class="fa-solid fa-calendar-days"></i></span>
-                        <span class="link-text">Calendar</span>
-                    </a>
-                    <a href="https://drive.google.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-google-drive"></i></span>
-                        <span class="link-text">Drive</span>
-                    </a>
-                    <a href="https://trello.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-trello"></i></span>
-                        <span class="link-text">Trello</span>
-                    </a>
-                    <a href="https://figma.com" class="link-card">
-                        <span class="link-icon"><i class="fa-brands fa-figma"></i></span>
-                        <span class="link-text">Figma</span>
-                    </a>
-                </div>
-            </section>
+        <main class="links-grid" id="links-grid">
+            <!-- Categories and links will be populated dynamically -->
         </main>
 
         <!-- Footer Widget -->

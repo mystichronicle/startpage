@@ -1,71 +1,204 @@
 // ========================================
-// Modern Dark Startpage JavaScript
+// Sip - Modern Browser Startpage
 // ========================================
 
 // ========================================
-// Settings Configuration
+// Default Data
 // ========================================
 
-const settings = {
-    timeFormat: localStorage.getItem('timeFormat') || '12',
-    tempUnit: localStorage.getItem('tempUnit') || 'F',
-    theme: localStorage.getItem('theme') || 'dark'
+const defaultCategories = [
+    { id: 'dev', name: 'Development', icon: 'fa-solid fa-code' },
+    { id: 'social', name: 'Social', icon: 'fa-solid fa-users' },
+    { id: 'media', name: 'Media', icon: 'fa-solid fa-play' },
+    { id: 'productivity', name: 'Productivity', icon: 'fa-solid fa-briefcase' }
+];
+
+const defaultLinks = {
+    'dev': [
+        { name: 'GitHub', url: 'https://github.com', icon: 'fa-brands fa-github' },
+        { name: 'GitLab', url: 'https://gitlab.com', icon: 'fa-brands fa-gitlab' },
+        { name: 'Stack Overflow', url: 'https://stackoverflow.com', icon: 'fa-brands fa-stack-overflow' },
+        { name: 'CodePen', url: 'https://codepen.io', icon: 'fa-brands fa-codepen' },
+        { name: 'Vercel', url: 'https://vercel.com', icon: 'fa-solid fa-v' },
+        { name: 'Docker', url: 'https://docker.com', icon: 'fa-brands fa-docker' }
+    ],
+    'social': [
+        { name: 'Reddit', url: 'https://reddit.com', icon: 'fa-brands fa-reddit-alien' },
+        { name: 'Twitter', url: 'https://twitter.com', icon: 'fa-brands fa-x-twitter' },
+        { name: 'Discord', url: 'https://discord.com', icon: 'fa-brands fa-discord' },
+        { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'fa-brands fa-linkedin' },
+        { name: 'Mastodon', url: 'https://mastodon.social', icon: 'fa-brands fa-mastodon' },
+        { name: 'Twitch', url: 'https://twitch.tv', icon: 'fa-brands fa-twitch' }
+    ],
+    'media': [
+        { name: 'YouTube', url: 'https://youtube.com', icon: 'fa-brands fa-youtube' },
+        { name: 'Spotify', url: 'https://spotify.com', icon: 'fa-brands fa-spotify' },
+        { name: 'Netflix', url: 'https://netflix.com', icon: 'fa-solid fa-film' },
+        { name: 'SoundCloud', url: 'https://soundcloud.com', icon: 'fa-brands fa-soundcloud' },
+        { name: 'Prime Video', url: 'https://primevideo.com', icon: 'fa-brands fa-amazon' },
+        { name: 'Plex', url: 'https://plex.tv', icon: 'fa-solid fa-circle-play' }
+    ],
+    'productivity': [
+        { name: 'Notion', url: 'https://notion.so', icon: 'fa-solid fa-book' },
+        { name: 'Gmail', url: 'https://mail.google.com', icon: 'fa-solid fa-envelope' },
+        { name: 'Calendar', url: 'https://calendar.google.com', icon: 'fa-solid fa-calendar-days' },
+        { name: 'Drive', url: 'https://drive.google.com', icon: 'fa-brands fa-google-drive' },
+        { name: 'Trello', url: 'https://trello.com', icon: 'fa-brands fa-trello' },
+        { name: 'Figma', url: 'https://figma.com', icon: 'fa-brands fa-figma' }
+    ]
 };
 
-// Apply theme on load
+const categoryColors = ['mauve', 'blue', 'red', 'green', 'peach', 'teal', 'pink', 'yellow'];
+
+// ========================================
+// Search Engine Configuration
+// ========================================
+
+const allSearchEngines = {
+    google: {
+        name: 'Google',
+        url: 'https://www.google.com/search?q=',
+        icon: '<i class="fa-brands fa-google"></i>'
+    },
+    duckduckgo: {
+        name: 'DuckDuckGo',
+        url: 'https://duckduckgo.com/?q=',
+        icon: '<span class="nf-icon">󰇥</span>'
+    },
+    github: {
+        name: 'GitHub',
+        url: 'https://github.com/search?q=',
+        icon: '<i class="fa-brands fa-github"></i>'
+    },
+    youtube: {
+        name: 'YouTube',
+        url: 'https://www.youtube.com/results?search_query=',
+        icon: '<i class="fa-brands fa-youtube"></i>'
+    },
+    bing: {
+        name: 'Bing',
+        url: 'https://www.bing.com/search?q=',
+        icon: '<i class="fa-brands fa-microsoft"></i>'
+    },
+    amazon: {
+        name: 'Amazon',
+        url: 'https://www.amazon.com/s?k=',
+        icon: '<i class="fa-brands fa-amazon"></i>'
+    },
+    wikipedia: {
+        name: 'Wikipedia',
+        url: 'https://en.wikipedia.org/wiki/Special:Search?search=',
+        icon: '<i class="fa-brands fa-wikipedia-w"></i>'
+    }
+};
+
+// ========================================
+// Settings Management
+// ========================================
+
+function loadSettings() {
+    const defaults = {
+        userName: '',
+        theme: 'dark',
+        colorMode: 'multi',
+        timeFormat: '12',
+        tempUnit: 'F',
+        showQuotes: 'true',
+        enabledEngines: ['google', 'duckduckgo', 'github', 'youtube'],
+        preferredEngine: 'google'
+    };
+    
+    return {
+        userName: localStorage.getItem('userName') ?? defaults.userName,
+        theme: localStorage.getItem('theme') ?? defaults.theme,
+        colorMode: localStorage.getItem('colorMode') ?? defaults.colorMode,
+        timeFormat: localStorage.getItem('timeFormat') ?? defaults.timeFormat,
+        tempUnit: localStorage.getItem('tempUnit') ?? defaults.tempUnit,
+        showQuotes: localStorage.getItem('showQuotes') ?? defaults.showQuotes,
+        enabledEngines: JSON.parse(localStorage.getItem('enabledEngines')) ?? defaults.enabledEngines,
+        preferredEngine: localStorage.getItem('preferredEngine') ?? defaults.preferredEngine
+    };
+}
+
+function saveSettings(key, value) {
+    if (typeof value === 'object') {
+        localStorage.setItem(key, JSON.stringify(value));
+    } else {
+        localStorage.setItem(key, value);
+    }
+    settings[key] = value;
+}
+
+function loadCategories() {
+    const saved = localStorage.getItem('categories');
+    if (!saved) return [...defaultCategories];
+    
+    // Migrate old HTML format to simple class format
+    const cats = JSON.parse(saved);
+    return cats.map(cat => {
+        // Check if icon is in old HTML format
+        if (cat.icon && cat.icon.includes('<i class="')) {
+            const match = cat.icon.match(/class="([^"]+)"/);
+            if (match) {
+                cat.icon = match[1];
+            }
+        }
+        return cat;
+    });
+}
+
+function saveCategories(cats) {
+    localStorage.setItem('categories', JSON.stringify(cats));
+}
+
+function loadLinks() {
+    const saved = localStorage.getItem('links');
+    return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultLinks));
+}
+
+function saveLinks(lnks) {
+    localStorage.setItem('links', JSON.stringify(lnks));
+}
+
+// Initialize settings
+let settings = loadSettings();
+let categories = loadCategories();
+let links = loadLinks();
+let currentEngine = settings.preferredEngine;
+
+// ========================================
+// Theme Management
+// ========================================
+
 function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
-    settings.theme = theme;
-    localStorage.setItem('theme', theme);
+    saveSettings('theme', theme);
+}
+
+function applyColorMode(mode) {
+    document.documentElement.setAttribute('data-color-mode', mode);
+    saveSettings('colorMode', mode);
+    renderLinksGrid();
 }
 
 // Apply saved theme immediately
 applyTheme(settings.theme);
 
-// Search Engine Configuration
-const searchEngines = {
-    google: {
-        name: 'Google',
-        url: 'https://www.google.com/search?q=',
-        icon: ''
-    },
-    duckduckgo: {
-        name: 'DuckDuckGo',
-        url: 'https://duckduckgo.com/?q=',
-        icon: '󰇥'
-    },
-    github: {
-        name: 'GitHub',
-        url: 'https://github.com/search?q=',
-        icon: ''
-    },
-    youtube: {
-        name: 'YouTube',
-        url: 'https://www.youtube.com/results?search_query=',
-        icon: '󰗃'
-    }
-};
-
-// State
-let currentEngine = 'google';
-
+// ========================================
 // DOM Elements
-const searchInput = document.getElementById('search');
-const timeElement = document.getElementById('time');
-const dateElement = document.getElementById('date');
-const greetingElement = document.getElementById('greeting');
-const weatherElement = document.getElementById('weather');
-const quoteElement = document.getElementById('quote');
-const engineButtons = document.querySelectorAll('.engine');
+// ========================================
+
+let searchInput, timeElement, dateElement, greetingElement, weatherElement, quoteElement, linksGrid;
 
 // ========================================
 // Time & Date Functions
 // ========================================
 
 function updateDateTime() {
+    if (!timeElement || !dateElement) return;
+    
     const now = new Date();
     
-    // Format time based on setting
     let hours = now.getHours();
     const minutes = now.getMinutes().toString().padStart(2, '0');
     let timeString;
@@ -80,39 +213,34 @@ function updateDateTime() {
     
     timeElement.textContent = timeString;
     
-    // Format date
-    const options = { 
-        weekday: 'long', 
-        month: 'short', 
-        day: 'numeric' 
-    };
+    const options = { weekday: 'long', month: 'short', day: 'numeric' };
     dateElement.textContent = now.toLocaleDateString('en-US', options);
     
-    // Update greeting based on time
     updateGreeting(now.getHours());
 }
 
-// User's name for personalized greeting
-const userName = 'Bryan';
-
 function updateGreeting(hour) {
+    if (!greetingElement) return;
+    
     let greeting, iconHtml;
     
     if (hour >= 5 && hour < 12) {
         greeting = 'Good morning';
-        iconHtml = '<span class="nf-icon">󰖜</span>'; // sunrise (nerd font)
+        iconHtml = '<span class="nf-icon">󰖜</span>';
     } else if (hour >= 12 && hour < 17) {
         greeting = 'Good afternoon';
-        iconHtml = '<i class="fa-solid fa-sun"></i>'; // sun
+        iconHtml = '<i class="fa-solid fa-sun"></i>';
     } else if (hour >= 17 && hour < 21) {
         greeting = 'Good evening';
-        iconHtml = '<span class="nf-icon">󰖛</span>'; // sunset (nerd font)
+        iconHtml = '<span class="nf-icon">󰖛</span>';
     } else {
         greeting = 'Good night';
-        iconHtml = '<i class="fa-solid fa-moon"></i>'; // moon
+        iconHtml = '<i class="fa-solid fa-moon"></i>';
     }
     
-    greetingElement.textContent = `${greeting}, ${userName}`;
+    const userName = settings.userName;
+    greetingElement.textContent = userName ? `${greeting}, ${userName}` : greeting;
+    
     const iconElement = document.getElementById('greeting-icon');
     if (iconElement) {
         iconElement.innerHTML = iconHtml;
@@ -126,33 +254,77 @@ function updateGreeting(hour) {
 function performSearch(query) {
     if (!query.trim()) return;
     
-    const engine = searchEngines[currentEngine];
+    const engine = allSearchEngines[currentEngine];
+    if (!engine) return;
+    
     const searchUrl = engine.url + encodeURIComponent(query);
     window.location.href = searchUrl;
 }
 
 function setSearchEngine(engine) {
-    if (!searchEngines[engine]) return;
+    if (!allSearchEngines[engine]) return;
+    if (!settings.enabledEngines.includes(engine)) return;
     
     currentEngine = engine;
-    localStorage.setItem('preferredEngine', engine);
+    saveSettings('preferredEngine', engine);
     
-    // Update active state
-    engineButtons.forEach(btn => {
+    document.querySelectorAll('.search-engines .engine').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.engine === engine);
     });
     
-    // Update placeholder
-    searchInput.placeholder = `Search ${searchEngines[engine].name}...`;
+    if (searchInput) {
+        searchInput.placeholder = `Search ${allSearchEngines[engine].name}...`;
+    }
+}
+
+function renderSearchEngines() {
+    const container = document.querySelector('.search-engines');
+    if (!container) return;
+    
+    container.innerHTML = settings.enabledEngines.map((engineId, index) => {
+        const engine = allSearchEngines[engineId];
+        if (!engine) return '';
+        return `
+            <button class="engine ${engineId === currentEngine ? 'active' : ''}" 
+                    data-engine="${engineId}" 
+                    title="${engine.name} (${index + 1})">
+                ${engine.icon}
+            </button>
+        `;
+    }).join('');
+    
+    // Rebind click events
+    container.querySelectorAll('.engine').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setSearchEngine(btn.dataset.engine);
+            if (searchInput) searchInput.focus();
+        });
+    });
+    
+    // Update keyboard hints
+    updateKeyboardHints();
+}
+
+function updateKeyboardHints() {
+    const hintsContainer = document.querySelector('.keyboard-hints');
+    if (!hintsContainer) return;
+    
+    const engineCount = settings.enabledEngines.length;
+    const engineHint = engineCount > 1 ? `<kbd>1-${engineCount}</kbd> Engine` : '';
+    
+    hintsContainer.innerHTML = `
+        <span class="hint"><kbd>/</kbd> Search</span>
+        ${engineHint ? `<span class="hint">${engineHint}</span>` : ''}
+        <span class="hint"><kbd>Esc</kbd> Clear</span>
+    `;
 }
 
 // ========================================
-// Weather Function (Mock - replace with real API)
+// Weather Function
 // ========================================
 
 function updateWeather() {
-    // Mock weather data - replace with actual API call
-    // Example with OpenWeatherMap: https://api.openweathermap.org/data/2.5/weather
+    if (!weatherElement) return;
     
     const mockWeatherData = [
         { tempF: 72, condition: 'Partly Cloudy', icon: 'fa-cloud-sun' },
@@ -167,7 +339,6 @@ function updateWeather() {
     
     const weather = mockWeatherData[Math.floor(Math.random() * mockWeatherData.length)];
     
-    // Convert temperature based on setting
     let temp, unit;
     if (settings.tempUnit === 'C') {
         temp = Math.round((weather.tempF - 32) * 5 / 9);
@@ -179,7 +350,6 @@ function updateWeather() {
     
     weatherElement.textContent = `${temp}${unit} ${weather.condition}`;
     
-    // Update weather icon using Font Awesome
     const iconElement = weatherElement.previousElementSibling;
     if (iconElement) {
         iconElement.innerHTML = `<i class="fa-solid ${weather.icon}"></i>`;
@@ -204,127 +374,66 @@ const quotes = [
 ];
 
 function updateQuote() {
-    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-    quoteElement.textContent = randomQuote;
-}
-
-// ========================================
-// Keyboard Shortcuts
-// ========================================
-
-function handleKeyboard(event) {
-    // Focus search on '/' key
-    if (event.key === '/' && document.activeElement !== searchInput) {
-        event.preventDefault();
-        searchInput.focus();
-    }
+    const quoteWidget = document.querySelector('.quote-widget');
+    if (!quoteWidget || !quoteElement) return;
     
-    // Clear search on Escape
-    if (event.key === 'Escape') {
-        searchInput.value = '';
-        searchInput.blur();
-    }
-    
-    // Number keys to switch engines (1-4)
-    if (document.activeElement !== searchInput) {
-        const engineKeys = { '1': 'google', '2': 'duckduckgo', '3': 'github', '4': 'youtube' };
-        if (engineKeys[event.key]) {
-            setSearchEngine(engineKeys[event.key]);
-        }
+    if (settings.showQuotes === 'true') {
+        quoteWidget.style.display = 'flex';
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        quoteElement.textContent = randomQuote;
+    } else {
+        quoteWidget.style.display = 'none';
     }
 }
 
 // ========================================
-// Event Listeners
+// Links Grid Rendering
 // ========================================
 
-function initEventListeners() {
-    // Search form submission
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            performSearch(searchInput.value);
-        }
-    });
-    
-    // Engine buttons
-    engineButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            setSearchEngine(btn.dataset.engine);
-            searchInput.focus();
-        });
-    });
-    
-    // Global keyboard shortcuts
-    document.addEventListener('keydown', handleKeyboard);
-    
-    // Link hover effects (add sound or haptic feedback here if desired)
-    document.querySelectorAll('.link-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            // Could add subtle sound effect here
-        });
-    });
-}
-
-// ========================================
-// Dynamic Grid Layout
-// ========================================
-
-function updateGridLayout() {
-    const linksGrid = document.querySelector('.links-grid');
+function renderLinksGrid() {
     if (!linksGrid) return;
     
-    const categoryCount = linksGrid.querySelectorAll('.link-group').length;
+    const colorMode = settings.colorMode;
     
-    // Remove existing grid classes
+    linksGrid.innerHTML = categories.map((category, index) => {
+        const categoryLinks = links[category.id] || [];
+        const colorClass = colorMode === 'multi' ? categoryColors[index % categoryColors.length] : 'mauve';
+        
+        return `
+            <section class="link-group" data-category="${category.id}" data-color="${colorClass}">
+                <h2 class="group-title">
+                    <span class="title-icon"><i class="${category.icon}"></i></span>
+                    ${category.name}
+                </h2>
+                <div class="links">
+                    ${categoryLinks.map(link => `
+                        <a href="${link.url}" class="link-card">
+                            <span class="link-icon"><i class="${link.icon || 'fa-solid fa-link'}"></i></span>
+                            <span class="link-text">${link.name}</span>
+                        </a>
+                    `).join('')}
+                </div>
+            </section>
+        `;
+    }).join('');
+    
+    updateGridLayout();
+}
+
+function updateGridLayout() {
+    if (!linksGrid) return;
+    
+    const categoryCount = categories.length;
+    
     linksGrid.classList.remove('grid-single', 'grid-even', 'grid-odd');
     
-    // Apply appropriate class based on count
     if (categoryCount === 1) {
         linksGrid.classList.add('grid-single');
     } else if (categoryCount % 2 === 0) {
-        // Even: 2, 4, 6, 8... -> 2 columns
         linksGrid.classList.add('grid-even');
     } else {
-        // Odd: 3, 5, 7, 9... -> 3 columns
         linksGrid.classList.add('grid-odd');
     }
-}
-
-// ========================================
-// Initialization
-// ========================================
-
-function init() {
-    // Set up dynamic grid layout
-    updateGridLayout();
-    
-    // Update time immediately and every second
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
-    
-    // Update weather
-    updateWeather();
-    setInterval(updateWeather, 600000); // Update every 10 minutes
-    
-    // Set random quote
-    updateQuote();
-    
-    // Restore preferred search engine
-    const savedEngine = localStorage.getItem('preferredEngine');
-    if (savedEngine && searchEngines[savedEngine]) {
-        setSearchEngine(savedEngine);
-    }
-    
-    // Initialize event listeners
-    initEventListeners();
-    
-    // Initialize settings
-    initSettings();
-    
-    // Focus search input after a brief delay (for animation)
-    setTimeout(() => {
-        searchInput.focus();
-    }, 700);
 }
 
 // ========================================
@@ -335,11 +444,18 @@ function initSettings() {
     const settingsBtn = document.getElementById('settings-btn');
     const settingsOverlay = document.getElementById('settings-overlay');
     const settingsClose = document.getElementById('settings-close');
-    const toggleBtns = document.querySelectorAll('.toggle-btn');
+    
+    // Help modal elements
+    const helpBtn = document.getElementById('help-btn');
+    const helpOverlay = document.getElementById('help-overlay');
+    const helpClose = document.getElementById('help-close');
+    
+    if (!settingsBtn || !settingsOverlay || !settingsClose) return;
     
     // Open settings
     settingsBtn.addEventListener('click', () => {
         settingsOverlay.classList.add('active');
+        populateSettingsUI();
     });
     
     // Close settings
@@ -354,39 +470,149 @@ function initSettings() {
         }
     });
     
+    // Help modal
+    if (helpBtn && helpOverlay && helpClose) {
+        helpBtn.addEventListener('click', () => {
+            helpOverlay.classList.add('active');
+        });
+        
+        helpClose.addEventListener('click', () => {
+            helpOverlay.classList.remove('active');
+        });
+        
+        helpOverlay.addEventListener('click', (e) => {
+            if (e.target === helpOverlay) {
+                helpOverlay.classList.remove('active');
+            }
+        });
+    }
+    
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && settingsOverlay.classList.contains('active')) {
-            settingsOverlay.classList.remove('active');
+        if (e.key === 'Escape') {
+            if (settingsOverlay.classList.contains('active')) {
+                settingsOverlay.classList.remove('active');
+            }
+            if (helpOverlay && helpOverlay.classList.contains('active')) {
+                helpOverlay.classList.remove('active');
+            }
         }
     });
     
-    // Update toggle button states based on saved settings
-    updateToggleStates();
+    // Tab switching
+    document.querySelectorAll('.settings-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.dataset.tab;
+            
+            document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
+            
+            tab.classList.add('active');
+            document.querySelector(`[data-panel="${tabId}"]`).classList.add('active');
+            
+            if (tabId === 'categories') {
+                renderCategoriesSettings();
+            } else if (tabId === 'links') {
+                renderLinksSettings();
+            }
+        });
+    });
     
-    // Handle toggle button clicks
-    toggleBtns.forEach(btn => {
+    // Toggle button handlers
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const setting = btn.dataset.setting;
             const value = btn.dataset.value;
             
-            // Update setting
-            settings[setting] = value;
-            localStorage.setItem(setting, value);
-            
-            // Update UI
+            saveSettings(setting, value);
             updateToggleStates();
             
-            // Apply changes
             if (setting === 'theme') {
                 applyTheme(value);
+            } else if (setting === 'colorMode') {
+                applyColorMode(value);
             } else if (setting === 'timeFormat') {
                 updateDateTime();
             } else if (setting === 'tempUnit') {
                 updateWeather();
+            } else if (setting === 'showQuotes') {
+                updateQuote();
             }
         });
     });
+    
+    // Name input handler
+    const nameInput = document.getElementById('setting-name');
+    if (nameInput) {
+        nameInput.addEventListener('input', (e) => {
+            saveSettings('userName', e.target.value);
+            updateGreeting(new Date().getHours());
+        });
+    }
+    
+    // Search engine checkboxes
+    document.querySelectorAll('#search-engine-options input').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const enabledEngines = [];
+            document.querySelectorAll('#search-engine-options input:checked').forEach(cb => {
+                enabledEngines.push(cb.dataset.engine);
+            });
+            
+            if (enabledEngines.length === 0) {
+                checkbox.checked = true;
+                return;
+            }
+            
+            saveSettings('enabledEngines', enabledEngines);
+            
+            if (!enabledEngines.includes(currentEngine)) {
+                setSearchEngine(enabledEngines[0]);
+            }
+            
+            renderSearchEngines();
+        });
+    });
+    
+    // Add category button
+    const addCategoryBtn = document.getElementById('add-category-btn');
+    if (addCategoryBtn) {
+        addCategoryBtn.addEventListener('click', addCategory);
+    }
+    
+    // Add link button
+    const addLinkBtn = document.getElementById('add-link-btn');
+    if (addLinkBtn) {
+        addLinkBtn.addEventListener('click', addLink);
+    }
+    
+    // Category selector for links
+    const linkCategorySelect = document.getElementById('link-category-select');
+    if (linkCategorySelect) {
+        linkCategorySelect.addEventListener('change', (e) => {
+            const addLinkBtn = document.getElementById('add-link-btn');
+            if (addLinkBtn) {
+                addLinkBtn.disabled = !e.target.value;
+            }
+            renderLinksForCategory(e.target.value);
+        });
+    }
+    
+    updateToggleStates();
+}
+
+function populateSettingsUI() {
+    // Populate name input
+    const nameInput = document.getElementById('setting-name');
+    if (nameInput) {
+        nameInput.value = settings.userName;
+    }
+    
+    // Populate search engine checkboxes
+    document.querySelectorAll('#search-engine-options input').forEach(checkbox => {
+        checkbox.checked = settings.enabledEngines.includes(checkbox.dataset.engine);
+    });
+    
+    updateToggleStates();
 }
 
 function updateToggleStates() {
@@ -398,32 +624,265 @@ function updateToggleStates() {
 }
 
 // ========================================
-// Start the application
+// Category Management
 // ========================================
 
-document.addEventListener('DOMContentLoaded', init);
-
-// ========================================
-// Optional: Service Worker for offline support
-// ========================================
-
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        // Uncomment to enable service worker
-        // navigator.serviceWorker.register('/sw.js');
+function renderCategoriesSettings() {
+    const container = document.getElementById('categories-list');
+    const addBtn = document.getElementById('add-category-btn');
+    
+    if (!container) return;
+    
+    container.innerHTML = categories.map((category, index) => `
+        <div class="category-item" data-id="${category.id}">
+            <span class="icon-preview"><i class="${category.icon}"></i></span>
+            <input type="text" class="icon-input" value="${category.icon}" placeholder="fa-solid fa-folder" data-field="icon">
+            <input type="text" value="${category.name}" placeholder="Category Name" maxlength="20" data-field="name">
+            <button class="delete-btn" title="Delete Category" ${categories.length <= 1 ? 'disabled' : ''}>
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    `).join('');
+    
+    if (addBtn) {
+        addBtn.disabled = categories.length >= 8;
+    }
+    
+    // Bind events
+    container.querySelectorAll('.category-item').forEach(item => {
+        const categoryId = item.dataset.id;
+        const iconPreview = item.querySelector('.icon-preview i');
+        
+        item.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                const field = input.dataset.field;
+                const category = categories.find(c => c.id === categoryId);
+                if (category) {
+                    category[field] = input.value;
+                    saveCategories(categories);
+                    renderLinksGrid();
+                    updateLinkCategorySelect();
+                    
+                    // Update icon preview
+                    if (field === 'icon' && iconPreview) {
+                        iconPreview.className = input.value || 'fa-solid fa-folder';
+                    }
+                }
+            });
+        });
+        
+        item.querySelector('.delete-btn').addEventListener('click', () => {
+            if (categories.length > 1) {
+                deleteCategory(categoryId);
+            }
+        });
     });
 }
 
+function addCategory() {
+    if (categories.length >= 8) return;
+    
+    const newId = 'cat_' + Date.now();
+    categories.push({
+        id: newId,
+        name: 'New Category',
+        icon: 'fa-solid fa-folder'
+    });
+    links[newId] = [];
+    
+    saveCategories(categories);
+    saveLinks(links);
+    renderCategoriesSettings();
+    renderLinksGrid();
+    updateLinkCategorySelect();
+}
+
+function deleteCategory(categoryId) {
+    categories = categories.filter(c => c.id !== categoryId);
+    delete links[categoryId];
+    
+    saveCategories(categories);
+    saveLinks(links);
+    renderCategoriesSettings();
+    renderLinksGrid();
+    updateLinkCategorySelect();
+}
+
 // ========================================
-// Optional: Command palette (advanced feature)
+// Link Management
+// ========================================
+
+function renderLinksSettings() {
+    updateLinkCategorySelect();
+    const select = document.getElementById('link-category-select');
+    if (select && select.value) {
+        renderLinksForCategory(select.value);
+    } else {
+        const container = document.getElementById('links-list');
+        if (container) container.innerHTML = '';
+    }
+}
+
+function updateLinkCategorySelect() {
+    const select = document.getElementById('link-category-select');
+    if (!select) return;
+    
+    const currentValue = select.value;
+    
+    select.innerHTML = '<option value="">-- Select a category --</option>' +
+        categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+    
+    if (categories.find(c => c.id === currentValue)) {
+        select.value = currentValue;
+    }
+}
+
+function renderLinksForCategory(categoryId) {
+    const container = document.getElementById('links-list');
+    const addBtn = document.getElementById('add-link-btn');
+    
+    if (!container) return;
+    
+    if (!categoryId) {
+        container.innerHTML = '';
+        if (addBtn) addBtn.disabled = true;
+        return;
+    }
+    
+    const categoryLinks = links[categoryId] || [];
+    
+    container.innerHTML = categoryLinks.map((link, index) => `
+        <div class="link-item" data-index="${index}">
+            <span class="icon-preview"><i class="${link.icon || 'fa-solid fa-link'}"></i></span>
+            <input type="text" class="icon-input" value="${link.icon || 'fa-solid fa-link'}" placeholder="fa-solid fa-link" data-field="icon">
+            <input type="text" value="${link.name}" placeholder="Link Name" maxlength="20" data-field="name">
+            <input type="url" class="url-input" value="${link.url}" placeholder="https://..." data-field="url">
+            <button class="delete-btn" title="Delete Link">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    `).join('');
+    
+    if (addBtn) {
+        addBtn.disabled = categoryLinks.length >= 10;
+    }
+    
+    // Bind events
+    container.querySelectorAll('.link-item').forEach(item => {
+        const index = parseInt(item.dataset.index);
+        const iconPreview = item.querySelector('.icon-preview i');
+        
+        item.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                const field = input.dataset.field;
+                if (links[categoryId] && links[categoryId][index]) {
+                    links[categoryId][index][field] = input.value;
+                    saveLinks(links);
+                    renderLinksGrid();
+                    
+                    // Update icon preview
+                    if (field === 'icon' && iconPreview) {
+                        iconPreview.className = input.value || 'fa-solid fa-link';
+                    }
+                }
+            });
+        });
+        
+        item.querySelector('.delete-btn').addEventListener('click', () => {
+            deleteLink(categoryId, index);
+        });
+    });
+}
+
+function addLink() {
+    const select = document.getElementById('link-category-select');
+    const categoryId = select ? select.value : null;
+    if (!categoryId) return;
+    
+    if (!links[categoryId]) {
+        links[categoryId] = [];
+    }
+    
+    if (links[categoryId].length >= 10) return;
+    
+    links[categoryId].push({
+        name: 'New Link',
+        url: 'https://',
+        icon: 'fa-solid fa-link'
+    });
+    
+    saveLinks(links);
+    renderLinksForCategory(categoryId);
+    renderLinksGrid();
+}
+
+function deleteLink(categoryId, index) {
+    if (links[categoryId]) {
+        links[categoryId].splice(index, 1);
+        saveLinks(links);
+        renderLinksForCategory(categoryId);
+        renderLinksGrid();
+    }
+}
+
+// ========================================
+// Keyboard Shortcuts
+// ========================================
+
+function handleKeyboard(event) {
+    const settingsOverlay = document.getElementById('settings-overlay');
+    const isSettingsOpen = settingsOverlay && settingsOverlay.classList.contains('active');
+    
+    if (event.key === '/' && document.activeElement !== searchInput && !isSettingsOpen) {
+        event.preventDefault();
+        if (searchInput) searchInput.focus();
+    }
+    
+    if (event.key === 'Escape' && searchInput) {
+        searchInput.value = '';
+        searchInput.blur();
+    }
+    
+    // Dynamic engine switching based on enabled engines
+    if (document.activeElement !== searchInput && !isSettingsOpen) {
+        const num = parseInt(event.key);
+        if (num >= 1 && num <= settings.enabledEngines.length) {
+            setSearchEngine(settings.enabledEngines[num - 1]);
+        }
+    }
+}
+
+// ========================================
+// Event Listeners
+// ========================================
+
+function initEventListeners() {
+    if (searchInput) {
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const value = searchInput.value;
+                if (!executeCommand(value)) {
+                    performSearch(value);
+                } else {
+                    searchInput.value = '';
+                }
+            }
+        });
+    }
+    
+    document.addEventListener('keydown', handleKeyboard);
+}
+
+// ========================================
+// Command palette
 // ========================================
 
 const commands = {
-    'theme dark': () => document.body.classList.remove('light'),
-    'theme light': () => document.body.classList.add('light'),
+    'theme dark': () => applyTheme('dark'),
+    'theme light': () => applyTheme('light'),
     'new tab': () => window.open('about:blank', '_blank'),
     'github': () => window.location.href = 'https://github.com',
-    'settings': () => console.log('Settings panel would open here'),
+    'settings': () => document.getElementById('settings-overlay').classList.add('active'),
 };
 
 function executeCommand(input) {
@@ -438,14 +897,56 @@ function executeCommand(input) {
     return false;
 }
 
-// Add command execution to search
-searchInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        const value = searchInput.value;
-        if (!executeCommand(value)) {
-            performSearch(value);
-        } else {
-            searchInput.value = '';
-        }
+// ========================================
+// Initialization
+// ========================================
+
+function init() {
+    // Get DOM elements
+    searchInput = document.getElementById('search');
+    timeElement = document.getElementById('time');
+    dateElement = document.getElementById('date');
+    greetingElement = document.getElementById('greeting');
+    weatherElement = document.getElementById('weather');
+    quoteElement = document.getElementById('quote');
+    linksGrid = document.getElementById('links-grid');
+    
+    // Render dynamic content
+    renderLinksGrid();
+    renderSearchEngines();
+    
+    // Update time immediately and every second
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+    
+    // Update weather
+    updateWeather();
+    setInterval(updateWeather, 600000);
+    
+    // Set random quote
+    updateQuote();
+    
+    // Restore preferred search engine
+    if (settings.enabledEngines.includes(settings.preferredEngine)) {
+        setSearchEngine(settings.preferredEngine);
+    } else if (settings.enabledEngines.length > 0) {
+        setSearchEngine(settings.enabledEngines[0]);
     }
-});
+    
+    // Initialize event listeners
+    initEventListeners();
+    
+    // Initialize settings
+    initSettings();
+    
+    // Focus search input after a brief delay
+    setTimeout(() => {
+        if (searchInput) searchInput.focus();
+    }, 700);
+}
+
+// ========================================
+// Start the application
+// ========================================
+
+document.addEventListener('DOMContentLoaded', init);
