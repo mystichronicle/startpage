@@ -16,6 +16,9 @@ A cozy new tab page featuring beautiful Catppuccin color themes, glassmorphism e
 ### Settings Panel
 ![Settings](screenshots/settings.png)
 
+### Help Panel
+![Help](screenshots/help.png)
+
 </details>
 
 ## ✨ Features
