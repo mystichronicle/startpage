@@ -1291,17 +1291,17 @@ body {
     color: var(--subtext0);
 }
 
+.quote-widget {
+    flex: 1;
+    justify-content: flex-end;
+    min-width: 0;
+}
+
 .quote-widget .widget-text {
     font-style: italic;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 500px;
-}
-
-.quote-widget {
-    flex-shrink: 1;
-    min-width: 0;
 }
 
 .keyboard-hints {
