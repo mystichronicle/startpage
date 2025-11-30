@@ -1272,13 +1272,13 @@ body {
     border-radius: var(--radius-lg);
     backdrop-filter: blur(20px);
     gap: var(--spacing-xl);
-    flex-wrap: wrap;
 }
 
 .widget {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+    white-space: nowrap;
 }
 
 .widget-icon {
@@ -1291,23 +1291,17 @@ body {
     color: var(--subtext0);
 }
 
-.quote-widget {
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
-    max-width: 400px;
-}
-
-.quote-widget .widget-icon {
-    align-self: flex-end;
-}
-
 .quote-widget .widget-text {
     font-style: italic;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+}
+
+.quote-widget {
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .keyboard-hints {

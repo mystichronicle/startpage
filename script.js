@@ -362,15 +362,15 @@ function updateWeather() {
 
 const quotes = [
     '"The only way to do great work is to love what you do." - Steve Jobs',
-    '"Code is like humor. When you have to explain it, it\'s bad." - Cory House',
     '"First, solve the problem. Then, write the code." - John Johnson',
-    '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler',
-    '"Programming isn\'t about what you know; it\'s about what you can figure out." - Chris Pine',
-    '"The best error message is the one that never shows up." - Thomas Fuchs',
     '"Simplicity is the soul of efficiency." - Austin Freeman',
     '"Make it work, make it right, make it fast." - Kent Beck',
     '"Talk is cheap. Show me the code." - Linus Torvalds',
-    '"Sometimes it pays to stay in bed on Monday, rather than spending the rest of the week debugging Monday\'s code." - Dan Salomon'
+    '"Creativity is intelligence having fun." - Albert Einstein',
+    '"Done is better than perfect." - Sheryl Sandberg',
+    '"Stay hungry, stay foolish." - Steve Jobs',
+    '"Think different." - Apple',
+    '"Less is more." - Ludwig Mies van der Rohe'
 ];
 
 function updateQuote() {
