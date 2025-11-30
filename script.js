@@ -369,8 +369,7 @@ const quotes = [
     '"Creativity is intelligence having fun." - Albert Einstein',
     '"Done is better than perfect." - Sheryl Sandberg',
     '"Stay hungry, stay foolish." - Steve Jobs',
-    '"Think different." - Apple',
-    '"Less is more." - Ludwig Mies van der Rohe'
+    '"Code is like humor. When you have to explain it, it’s bad." - Cory House',
 ];
 
 function updateQuote() {
