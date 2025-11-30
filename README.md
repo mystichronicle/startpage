@@ -4,6 +4,20 @@ A cozy new tab page featuring beautiful Catppuccin color themes, glassmorphism e
 
 ![Preview Image](sip_preview_new.png)
 
+<details>
+<summary>📸 Screenshots</summary>
+
+### Dark Theme (Mocha)
+![Dark Theme](screenshots/dark-theme.png)
+
+### Light Theme (Latte)
+![Light Theme](screenshots/light-theme.png)
+
+### Settings Panel
+![Settings](screenshots/settings.png)
+
+</details>
+
 ## ✨ Features
 
 - **Catppuccin Themes** - Mocha (dark) and Latte (light) color palettes
