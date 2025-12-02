@@ -3,26 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sip</title>
-    <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
-    <!-- Font Awesome 6 -->
+    <title>Startpage</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <!-- Ambient background effects -->
+        
         <div class="ambient-bg">
             <div class="glow glow-1"></div>
             <div class="glow glow-2"></div>
             <div class="glow glow-3"></div>
         </div>
 
-        <!-- Header with greeting and time -->
+        
         <header class="header">
             <div class="greeting">
                 <span class="icon" id="greeting-icon"><i class="fa-solid fa-sun"></i></span>
-                <span class="greeting-text" id="greeting">Good evening, Bryan</span>
+                <span class="greeting-text" id="greeting">Good evening, Debjit</span>
             </div>
             <div class="header-right">
                 <div class="datetime">
@@ -32,7 +31,7 @@
             </div>
         </header>
 
-        <!-- Help Modal -->
+        
         <div class="help-overlay" id="help-overlay">
             <div class="help-modal">
                 <div class="help-header">
@@ -90,7 +89,7 @@
             </div>
         </div>
 
-        <!-- Settings Modal -->
+        
         <div class="settings-overlay" id="settings-overlay">
             <div class="settings-modal">
                 <div class="settings-header">
@@ -100,7 +99,7 @@
                     </button>
                 </div>
                 
-                <!-- Settings Tabs -->
+                
                 <div class="settings-tabs">
                     <button class="settings-tab active" data-tab="general">
                         <i class="fa-solid fa-sliders"></i> General
@@ -114,7 +113,7 @@
                 </div>
 
                 <div class="settings-body">
-                    <!-- General Tab -->
+                    
                     <div class="settings-panel active" data-panel="general">
                         <div class="setting-item">
                             <div class="setting-label">
@@ -224,18 +223,18 @@
                         </div>
                     </div>
                     
-                    <!-- Categories Tab -->
+                    
                     <div class="settings-panel" data-panel="categories">
                         <p class="panel-description">Add up to 8 categories. You can use emoji or text for icons.</p>
                         <div class="categories-list" id="categories-list">
-                            <!-- Categories will be populated dynamically -->
+                            
                         </div>
                         <button class="add-btn" id="add-category-btn">
                             <i class="fa-solid fa-plus"></i> Add Category
                         </button>
                     </div>
                     
-                    <!-- Links Tab -->
+                    
                     <div class="settings-panel" data-panel="links">
                         <p class="panel-description">Select a category, then add up to 10 links.</p>
                         <div class="category-selector">
@@ -245,7 +244,7 @@
                             </select>
                         </div>
                         <div class="links-list" id="links-list">
-                            <!-- Links will be populated dynamically -->
+                            
                         </div>
                         <button class="add-btn" id="add-link-btn" disabled>
                             <i class="fa-solid fa-plus"></i> Add Link
@@ -255,7 +254,7 @@
             </div>
         </div>
 
-        <!-- Search Bar -->
+        
         <div class="search-row">
             <div class="search-container">
                 <div class="search-box">
@@ -279,13 +278,8 @@
             </div>
         </div>
 
-        <!-- Quick Links Grid -->
-        <main class="links-grid" id="links-grid">
-            <!-- Categories and links will be populated dynamically -->
-        </main>
-
-        <!-- Footer Widget -->
-        <footer class="footer">
+        
+        <div class="widgets-row">
             <div class="widget weather-widget">
                 <span class="widget-icon"><i class="fa-solid fa-cloud-sun"></i></span>
                 <span class="widget-text" id="weather">Loading...</span>
@@ -294,9 +288,14 @@
                 <span class="widget-icon"><i class="fa-solid fa-quote-left"></i></span>
                 <span class="widget-text" id="quote">"The only way to do great work is to love what you do."</span>
             </div>
-        </footer>
+        </div>
 
-        <!-- Keyboard Hints -->
+        
+        <main class="links-grid" id="links-grid">
+            
+        </main>
+
+        
         <div class="keyboard-hints">
             <span class="hint"><kbd>/</kbd> Search</span>
             <span class="hint"><kbd>1-4</kbd> Engine</span>

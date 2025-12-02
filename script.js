@@ -1,58 +1,52 @@
-// ========================================
-// Sip - Modern Browser Startpage
-// ========================================
 
-// ========================================
-// Default Data
-// ========================================
 
 const defaultCategories = [
     { id: 'dev', name: 'Development', icon: 'fa-solid fa-code' },
-    { id: 'social', name: 'Social', icon: 'fa-solid fa-users' },
     { id: 'media', name: 'Media', icon: 'fa-solid fa-play' },
-    { id: 'productivity', name: 'Productivity', icon: 'fa-solid fa-briefcase' }
+    { id: 'productivity', name: 'Productivity', icon: 'fa-solid fa-briefcase' },
+    { id: 'social', name: 'Social', icon: 'fa-solid fa-users' }
 ];
 
 const defaultLinks = {
     'dev': [
-        { name: 'GitHub', url: 'https://github.com', icon: 'fa-brands fa-github' },
-        { name: 'GitLab', url: 'https://gitlab.com', icon: 'fa-brands fa-gitlab' },
-        { name: 'Stack Overflow', url: 'https://stackoverflow.com', icon: 'fa-brands fa-stack-overflow' },
-        { name: 'CodePen', url: 'https://codepen.io', icon: 'fa-brands fa-codepen' },
-        { name: 'Vercel', url: 'https://vercel.com', icon: 'fa-solid fa-v' },
-        { name: 'Docker', url: 'https://docker.com', icon: 'fa-brands fa-docker' }
+        { name: 'GitHub', url: 'https://github.com/mystichronicle', icon: 'fa-brands fa-github' },
+        { name: 'GitHub Page', url: 'https://mystichronicle.github.io', icon: 'fa-solid fa-file-code' },
+        { name: 'Leetcode', url: 'https://leetcode.cn/', icon: 'fa-solid fa-code' },
+        { name: 'Website', url: 'https://debjit.is-a.dev', icon: 'fa-solid fa-globe' }
     ],
     'social': [
+        { name: 'Facebook', url: 'https://facebook.com/', icon: 'fa-brands fa-facebook' },
+        { name: 'Instagram', url: 'https://www.instagram.com/', icon: 'fa-brands fa-instagram' },
+        { name: 'X', url: 'https://x.com/', icon: 'fa-brands fa-x-twitter' },
+        { name: 'Telegram', url: 'https://web.telegram.org/#/im', icon: 'fa-brands fa-telegram' },
+        { name: 'Mastodon', url: 'https://mastodon.social/', icon: 'fa-brands fa-mastodon' },
         { name: 'Reddit', url: 'https://reddit.com', icon: 'fa-brands fa-reddit-alien' },
-        { name: 'Twitter', url: 'https://twitter.com', icon: 'fa-brands fa-x-twitter' },
-        { name: 'Discord', url: 'https://discord.com', icon: 'fa-brands fa-discord' },
-        { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'fa-brands fa-linkedin' },
-        { name: 'Mastodon', url: 'https://mastodon.social', icon: 'fa-brands fa-mastodon' },
-        { name: 'Twitch', url: 'https://twitch.tv', icon: 'fa-brands fa-twitch' }
+        { name: 'Linkedin', url: 'https://linkedin.com/in/', icon: 'fa-brands fa-linkedin' },
+        { name: 'Whatsapp', url: 'https://web.whatsapp.com', icon: 'fa-brands fa-whatsapp' },
+        { name: 'Discord', url: 'https://canary.discord.com/channels/@me', icon: 'fa-brands fa-discord' }
     ],
     'media': [
-        { name: 'YouTube', url: 'https://youtube.com', icon: 'fa-brands fa-youtube' },
-        { name: 'Spotify', url: 'https://spotify.com', icon: 'fa-brands fa-spotify' },
-        { name: 'Netflix', url: 'https://netflix.com', icon: 'fa-solid fa-film' },
-        { name: 'SoundCloud', url: 'https://soundcloud.com', icon: 'fa-brands fa-soundcloud' },
-        { name: 'Prime Video', url: 'https://primevideo.com', icon: 'fa-brands fa-amazon' },
-        { name: 'Plex', url: 'https://plex.tv', icon: 'fa-solid fa-circle-play' }
+        { name: 'YouTube', url: 'https://www.youtube.com', icon: 'fa-brands fa-youtube' },
+        { name: 'Google', url: 'https://www.google.com', icon: 'fa-brands fa-google' },
+        { name: 'JioHotstar', url: 'https://www.hotstar.com', icon: 'fa-solid fa-star' },
+        { name: 'Netflix', url: 'https://www.netflix.com', icon: 'fa-solid fa-n' },
+        { name: 'Prime Video', url: 'https://www.primevideo.com', icon: 'fa-brands fa-amazon' },
+        { name: 'Hoichoi', url: 'https://www.hoichoi.tv', icon: 'fa-solid fa-play-circle' }
     ],
     'productivity': [
-        { name: 'Notion', url: 'https://notion.so', icon: 'fa-solid fa-book' },
-        { name: 'Gmail', url: 'https://mail.google.com', icon: 'fa-solid fa-envelope' },
-        { name: 'Calendar', url: 'https://calendar.google.com', icon: 'fa-solid fa-calendar-days' },
+        { name: 'Gmail', url: 'https://mail.google.com/mail/u/0/#inbox', icon: 'fa-solid fa-envelope' },
         { name: 'Drive', url: 'https://drive.google.com', icon: 'fa-brands fa-google-drive' },
-        { name: 'Trello', url: 'https://trello.com', icon: 'fa-brands fa-trello' },
-        { name: 'Figma', url: 'https://figma.com', icon: 'fa-brands fa-figma' }
+        { name: 'Docs', url: 'https://docs.google.com', icon: 'fa-solid fa-file-word' },
+        { name: 'Sheets', url: 'https://sheets.google.com', icon: 'fa-solid fa-table' },
+        { name: 'Slides', url: 'https://slides.google.com', icon: 'fa-solid fa-file-powerpoint' },
+        { name: 'Meet', url: 'https://meet.google.com', icon: 'fa-solid fa-video' },
+        { name: 'Calendar', url: 'https://calendar.google.com', icon: 'fa-solid fa-calendar' },
+        { name: 'Classroom', url: 'https://classroom.google.com', icon: 'fa-solid fa-chalkboard-user' }
     ]
 };
 
 const categoryColors = ['mauve', 'blue', 'red', 'green', 'peach', 'teal', 'pink', 'yellow'];
 
-// ========================================
-// Search Engine Configuration
-// ========================================
 
 const allSearchEngines = {
     google: {
@@ -92,17 +86,14 @@ const allSearchEngines = {
     }
 };
 
-// ========================================
-// Settings Management
-// ========================================
 
 function loadSettings() {
     const defaults = {
-        userName: '',
+        userName: 'Debjit',
         theme: 'dark',
         colorMode: 'multi',
         timeFormat: '12',
-        tempUnit: 'F',
+        tempUnit: 'C',
         showQuotes: 'true',
         enabledEngines: ['google', 'duckduckgo', 'github', 'youtube'],
         preferredEngine: 'google'
@@ -160,15 +151,11 @@ function saveLinks(lnks) {
     localStorage.setItem('links', JSON.stringify(lnks));
 }
 
-// Initialize settings
 let settings = loadSettings();
 let categories = loadCategories();
 let links = loadLinks();
 let currentEngine = settings.preferredEngine;
 
-// ========================================
-// Theme Management
-// ========================================
 
 function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
@@ -181,18 +168,11 @@ function applyColorMode(mode) {
     renderLinksGrid();
 }
 
-// Apply saved theme immediately
 applyTheme(settings.theme);
 
-// ========================================
-// DOM Elements
-// ========================================
 
 let searchInput, timeElement, dateElement, greetingElement, weatherElement, quoteElement, linksGrid;
 
-// ========================================
-// Time & Date Functions
-// ========================================
 
 function updateDateTime() {
     if (!timeElement || !dateElement) return;
@@ -247,9 +227,6 @@ function updateGreeting(hour) {
     }
 }
 
-// ========================================
-// Search Functions
-// ========================================
 
 function performSearch(query) {
     if (!query.trim()) return;
@@ -319,75 +296,161 @@ function updateKeyboardHints() {
     `;
 }
 
-// ========================================
-// Weather Function
-// ========================================
+
+let weatherData = null;
+
+function getWeatherIcon(weatherCode, isDay) {
+    // WMO Weather interpretation codes
+    // https://open-meteo.com/en/docs
+    if (weatherCode === 0) return isDay ? 'fa-sun' : 'fa-moon';
+    if (weatherCode <= 3) return 'fa-cloud-sun';
+    if (weatherCode <= 48) return 'fa-cloud';
+    if (weatherCode <= 67) return 'fa-cloud-rain';
+    if (weatherCode <= 77) return 'fa-snowflake';
+    if (weatherCode <= 82) return 'fa-cloud-showers-heavy';
+    if (weatherCode <= 86) return 'fa-cloud-snow';
+    if (weatherCode <= 99) return 'fa-cloud-bolt';
+    return 'fa-cloud';
+}
+
+function getWeatherDescription(weatherCode) {
+    if (weatherCode === 0) return 'Clear';
+    if (weatherCode <= 3) return 'Partly Cloudy';
+    if (weatherCode <= 48) return 'Foggy';
+    if (weatherCode <= 67) return 'Rainy';
+    if (weatherCode <= 77) return 'Snowy';
+    if (weatherCode <= 82) return 'Rain Showers';
+    if (weatherCode <= 86) return 'Snow Showers';
+    if (weatherCode <= 99) return 'Thunderstorm';
+    return 'Unknown';
+}
+
+async function fetchWeatherData(latitude, longitude) {
+    try {
+        const response = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code,is_day&temperature_unit=celsius&timezone=auto`
+        );
+        
+        if (!response.ok) throw new Error('Weather API request failed');
+        
+        const data = await response.json();
+        weatherData = {
+            temp: Math.round(data.current.temperature_2m),
+            weatherCode: data.current.weather_code,
+            isDay: data.current.is_day === 1
+        };
+        
+        updateWeatherDisplay();
+    } catch (error) {
+        console.error('Error fetching weather:', error);
+        weatherElement.textContent = 'Weather unavailable';
+    }
+}
+
+function updateWeatherDisplay() {
+    if (!weatherElement || !weatherData) return;
+    
+    let temp = weatherData.temp;
+    let unit = '°C';
+    
+    // Convert to Fahrenheit if needed
+    if (settings.tempUnit === 'F') {
+        temp = Math.round((temp * 9/5) + 32);
+        unit = '°F';
+    }
+    
+    const condition = getWeatherDescription(weatherData.weatherCode);
+    const icon = getWeatherIcon(weatherData.weatherCode, weatherData.isDay);
+    
+    weatherElement.textContent = `${temp}${unit} ${condition}`;
+    
+    const iconElement = weatherElement.previousElementSibling;
+    if (iconElement) {
+        iconElement.innerHTML = `<i class="fa-solid ${icon}"></i>`;
+    }
+}
 
 function updateWeather() {
     if (!weatherElement) return;
     
-    const mockWeatherData = [
-        { tempF: 72, condition: 'Partly Cloudy', icon: 'fa-cloud-sun' },
-        { tempF: 64, condition: 'Cloudy', icon: 'fa-cloud' },
-        { tempF: 77, condition: 'Sunny', icon: 'fa-sun' },
-        { tempF: 59, condition: 'Rainy', icon: 'fa-cloud-rain' },
-        { tempF: 68, condition: 'Clear', icon: 'fa-moon' },
-        { tempF: 45, condition: 'Thunderstorms', icon: 'fa-cloud-bolt' },
-        { tempF: 28, condition: 'Snow', icon: 'fa-snowflake' },
-        { tempF: 55, condition: 'Windy', icon: 'fa-wind' }
-    ];
-    
-    const weather = mockWeatherData[Math.floor(Math.random() * mockWeatherData.length)];
-    
-    let temp, unit;
-    if (settings.tempUnit === 'C') {
-        temp = Math.round((weather.tempF - 32) * 5 / 9);
-        unit = '°C';
-    } else {
-        temp = weather.tempF;
-        unit = '°F';
+    // If we already have weather data, just update the display
+    if (weatherData) {
+        updateWeatherDisplay();
+        return;
     }
     
-    weatherElement.textContent = `${temp}${unit} ${weather.condition}`;
-    
-    const iconElement = weatherElement.previousElementSibling;
-    if (iconElement) {
-        iconElement.innerHTML = `<i class="fa-solid ${weather.icon}"></i>`;
+    // Try to get user's location
+    if ('geolocation' in navigator) {
+        weatherElement.textContent = 'Getting location...';
+        
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                fetchWeatherData(latitude, longitude);
+            },
+            (error) => {
+                console.error('Geolocation error:', error);
+                // Fallback to a default location (New York)
+                fetchWeatherData(40.7128, -74.0060);
+            },
+            {
+                timeout: 10000,
+                maximumAge: 300000 // Cache for 5 minutes
+            }
+        );
+    } else {
+        // Fallback if geolocation is not supported
+        weatherElement.textContent = 'Location not supported';
     }
 }
 
-// ========================================
-// Quotes Function
-// ========================================
 
-const quotes = [
-    '"The only way to do great work is to love what you do." - Steve Jobs',
-    '"First, solve the problem. Then, write the code." - John Johnson',
-    '"Simplicity is the soul of efficiency." - Austin Freeman',
-    '"Make it work, make it right, make it fast." - Kent Beck',
-    '"Talk is cheap. Show me the code." - Linus Torvalds',
-    '"Creativity is intelligence having fun." - Albert Einstein',
-    '"Done is better than perfect." - Sheryl Sandberg',
-    '"Stay hungry, stay foolish." - Steve Jobs',
-    '"Code is like humor. When you have to explain it, it’s bad." - Cory House',
-];
+let dailyQuote = null;
 
-function updateQuote() {
+async function fetchDailyQuote() {
+    try {
+        const response = await fetch('https://zenquotes.io/api/today');
+        if (!response.ok) throw new Error('Quote API request failed');
+        const data = await response.json();
+        if (data && data.length > 0) {
+            dailyQuote = `"${data[0].q}" - ${data[0].a}`;
+            updateQuoteDisplay();
+        }
+    } catch (error) {
+        console.error('Error fetching quote:', error);
+        const fallbackQuotes = [
+            '"The only way to do great work is to love what you do." - Steve Jobs',
+            '"First, solve the problem. Then, write the code." - John Johnson',
+            '"Simplicity is the soul of efficiency." - Austin Freeman',
+            '"Make it work, make it right, make it fast." - Kent Beck',
+            '"Talk is cheap. Show me the code." - Linus Torvalds'
+        ];
+        dailyQuote = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+        updateQuoteDisplay();
+    }
+}
+
+function updateQuoteDisplay() {
     const quoteWidget = document.querySelector('.quote-widget');
     if (!quoteWidget || !quoteElement) return;
-    
     if (settings.showQuotes === 'true') {
         quoteWidget.style.display = 'flex';
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        quoteElement.textContent = randomQuote;
+        if (dailyQuote) {
+            quoteElement.textContent = dailyQuote;
+        }
     } else {
         quoteWidget.style.display = 'none';
     }
 }
 
-// ========================================
-// Links Grid Rendering
-// ========================================
+function updateQuote() {
+    if (!dailyQuote) {
+        fetchDailyQuote();
+    } else {
+        updateQuoteDisplay();
+    }
+}
+
 
 function renderLinksGrid() {
     if (!linksGrid) return;
@@ -435,9 +498,6 @@ function updateGridLayout() {
     }
 }
 
-// ========================================
-// Settings Modal Functions
-// ========================================
 
 function initSettings() {
     const settingsBtn = document.getElementById('settings-btn');
@@ -622,9 +682,6 @@ function updateToggleStates() {
     });
 }
 
-// ========================================
-// Category Management
-// ========================================
 
 function renderCategoriesSettings() {
     const container = document.getElementById('categories-list');
@@ -707,9 +764,6 @@ function deleteCategory(categoryId) {
     updateLinkCategorySelect();
 }
 
-// ========================================
-// Link Management
-// ========================================
 
 function renderLinksSettings() {
     updateLinkCategorySelect();
@@ -824,9 +878,6 @@ function deleteLink(categoryId, index) {
     }
 }
 
-// ========================================
-// Keyboard Shortcuts
-// ========================================
 
 function handleKeyboard(event) {
     const settingsOverlay = document.getElementById('settings-overlay');
@@ -851,9 +902,6 @@ function handleKeyboard(event) {
     }
 }
 
-// ========================================
-// Event Listeners
-// ========================================
 
 function initEventListeners() {
     if (searchInput) {
@@ -872,9 +920,6 @@ function initEventListeners() {
     document.addEventListener('keydown', handleKeyboard);
 }
 
-// ========================================
-// Command palette
-// ========================================
 
 const commands = {
     'theme dark': () => applyTheme('dark'),
@@ -896,9 +941,6 @@ function executeCommand(input) {
     return false;
 }
 
-// ========================================
-// Initialization
-// ========================================
 
 function init() {
     // Get DOM elements
@@ -944,8 +986,5 @@ function init() {
     }, 700);
 }
 
-// ========================================
-// Start the application
-// ========================================
 
 document.addEventListener('DOMContentLoaded', init);
