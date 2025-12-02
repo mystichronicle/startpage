@@ -57,7 +57,7 @@ const allSearchEngines = {
     duckduckgo: {
         name: 'DuckDuckGo',
         url: 'https://duckduckgo.com/?q=',
-        icon: '<span class="nf-icon">󰇥</span>'
+        icon: '<i class="fa-solid fa-binoculars"></i>'
     },
     github: {
         name: 'GitHub',
@@ -95,6 +95,12 @@ function loadSettings() {
         timeFormat: '12',
         tempUnit: 'C',
         showQuotes: 'true',
+        showWeather: 'true',
+        showSearch: 'true',
+        showDev: 'true',
+        showMedia: 'true',
+        showProductivity: 'true',
+        showSocial: 'true',
         enabledEngines: ['google', 'duckduckgo', 'github', 'youtube'],
         preferredEngine: 'google'
     };
@@ -106,6 +112,12 @@ function loadSettings() {
         timeFormat: localStorage.getItem('timeFormat') ?? defaults.timeFormat,
         tempUnit: localStorage.getItem('tempUnit') ?? defaults.tempUnit,
         showQuotes: localStorage.getItem('showQuotes') ?? defaults.showQuotes,
+        showWeather: localStorage.getItem('showWeather') ?? defaults.showWeather,
+        showSearch: localStorage.getItem('showSearch') ?? defaults.showSearch,
+        showDev: localStorage.getItem('showDev') ?? defaults.showDev,
+        showMedia: localStorage.getItem('showMedia') ?? defaults.showMedia,
+        showProductivity: localStorage.getItem('showProductivity') ?? defaults.showProductivity,
+        showSocial: localStorage.getItem('showSocial') ?? defaults.showSocial,
         enabledEngines: JSON.parse(localStorage.getItem('enabledEngines')) ?? defaults.enabledEngines,
         preferredEngine: localStorage.getItem('preferredEngine') ?? defaults.preferredEngine
     };
@@ -348,12 +360,21 @@ async function fetchWeatherData(latitude, longitude) {
 }
 
 function updateWeatherDisplay() {
-    if (!weatherElement || !weatherData) return;
+    const weatherWidget = document.querySelector('.weather-widget');
+    if (!weatherElement || !weatherWidget) return;
+    
+    if (settings.showWeather === 'false') {
+        weatherWidget.style.display = 'none';
+        return;
+    }
+    
+    weatherWidget.style.display = 'flex';
+    
+    if (!weatherData) return;
     
     let temp = weatherData.temp;
     let unit = '°C';
     
-    // Convert to Fahrenheit if needed
     if (settings.tempUnit === 'F') {
         temp = Math.round((temp * 9/5) + 32);
         unit = '°F';
@@ -456,8 +477,17 @@ function renderLinksGrid() {
     if (!linksGrid) return;
     
     const colorMode = settings.colorMode;
+    const visibilityMap = {
+        'dev': settings.showDev === 'true',
+        'media': settings.showMedia === 'true',
+        'productivity': settings.showProductivity === 'true',
+        'social': settings.showSocial === 'true'
+    };
     
     linksGrid.innerHTML = categories.map((category, index) => {
+        const isVisible = visibilityMap[category.id] !== false;
+        if (!isVisible) return '';
+        
         const categoryLinks = links[category.id] || [];
         const colorClass = colorMode === 'multi' ? categoryColors[index % categoryColors.length] : 'mauve';
         
@@ -480,6 +510,7 @@ function renderLinksGrid() {
     }).join('');
     
     updateGridLayout();
+    updateSearchVisibility();
 }
 
 function updateGridLayout() {
@@ -495,6 +526,17 @@ function updateGridLayout() {
         linksGrid.classList.add('grid-even');
     } else {
         linksGrid.classList.add('grid-odd');
+    }
+}
+
+function updateSearchVisibility() {
+    const searchRow = document.querySelector('.search-row');
+    if (!searchRow) return;
+    
+    if (settings.showSearch === 'false') {
+        searchRow.style.display = 'none';
+    } else {
+        searchRow.style.display = 'flex';
     }
 }
 
@@ -596,6 +638,13 @@ function initSettings() {
                 updateWeather();
             } else if (setting === 'showQuotes') {
                 updateQuote();
+            } else if (setting === 'showWeather') {
+                updateWeather();
+            } else if (setting === 'showSearch') {
+                updateSearchVisibility();
+            } else if (setting === 'showDev' || setting === 'showMedia' || 
+                       setting === 'showProductivity' || setting === 'showSocial') {
+                renderLinksGrid();
             }
         });
     });
