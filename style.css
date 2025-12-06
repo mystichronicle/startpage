@@ -1365,15 +1365,27 @@ kbd {
     color: var(--crust);
 }
 
+@media (max-width: 1024px) {
+    .links-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .links-grid.grid-single {
+        grid-template-columns: 1fr !important;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
+        max-width: 100%;
     }
     
     .header {
         flex-direction: column;
         text-align: center;
-        gap: var(--spacing-lg);
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
     }
     
     .header-right {
@@ -1384,12 +1396,25 @@ kbd {
         text-align: center;
     }
     
-    .settings-modal {
-        margin: var(--spacing-md);
+    .greeting-text {
+        font-size: 1.3rem;
     }
     
     .time {
         font-size: 2rem;
+    }
+    
+    .date {
+        font-size: 0.85rem;
+    }
+    
+    .search-row {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .search-container {
+        width: 100%;
     }
     
     .search-box {
@@ -1406,15 +1431,98 @@ kbd {
         padding-top: var(--spacing-sm);
         width: 100%;
         justify-content: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .engine {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 1.1rem;
+    }
+    
+    .toolbar-btns {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .toolbar-btn {
+        padding: var(--spacing-md);
+        font-size: 1.2rem;
+    }
+    
+    .widgets-row {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+    
+    .widget {
+        justify-content: center;
+    }
+    
+    .quote-widget {
+        justify-content: center;
+    }
+    
+    .quote-widget .widget-text {
+        white-space: normal;
+        text-align: center;
+    }
+    
+    .links-grid {
+        grid-template-columns: 1fr !important;
+        gap: var(--spacing-lg);
     }
     
     .links {
         grid-template-columns: 1fr;
     }
     
-    .widgets-row {
+    .link-card {
+        padding: var(--spacing-md);
+        min-height: 60px;
+    }
+    
+    .link-icon {
+        font-size: 1.5rem;
+    }
+    
+    .link-text {
+        font-size: 0.95rem;
+    }
+    
+    .settings-modal,
+    .help-modal {
+        margin: var(--spacing-md);
+        width: calc(100% - 2rem);
+        max-height: calc(100vh - 2rem);
+    }
+    
+    .settings-tabs {
+        gap: var(--spacing-xs);
+    }
+    
+    .settings-tab {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.85rem;
+    }
+    
+    .settings-body {
+        padding: var(--spacing-md);
+    }
+    
+    .setting-item {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .setting-toggle {
+        width: 100%;
+    }
+    
+    .toggle-btn {
+        flex: 1;
+        padding: var(--spacing-sm);
     }
     
     .keyboard-hints {
@@ -1427,12 +1535,62 @@ kbd {
         font-size: 14px;
     }
     
+    .container {
+        padding: var(--spacing-sm);
+    }
+    
+    .header {
+        padding: var(--spacing-sm);
+    }
+    
     .greeting-text {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
     .time {
         font-size: 1.8rem;
+    }
+    
+    .date {
+        font-size: 0.75rem;
+    }
+    
+    .search-box {
+        padding: var(--spacing-sm);
+    }
+    
+    .search-input {
+        font-size: 0.9rem;
+    }
+    
+    .widgets-row {
+        padding: var(--spacing-sm);
+    }
+    
+    .widget-text {
+        font-size: 0.75rem;
+    }
+    
+    .group-title {
+        font-size: 1rem;
+        padding: var(--spacing-sm) 0;
+    }
+    
+    .link-card {
+        padding: var(--spacing-sm) var(--spacing-md);
+        min-height: 50px;
+    }
+    
+    .link-icon {
+        font-size: 1.3rem;
+    }
+    
+    .link-text {
+        font-size: 0.85rem;
+    }
+    
+    [data-category="social"] .links {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
