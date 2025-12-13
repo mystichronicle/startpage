@@ -355,7 +355,7 @@ async function fetchWeatherData(latitude, longitude) {
         updateWeatherDisplay();
     } catch (error) {
         console.error('Error fetching weather:', error);
-        weatherElement.textContent = 'Weather unavailable';
+        if (weatherElement) weatherElement.textContent = 'Weather unavailable';
     }
 }
 
@@ -393,6 +393,8 @@ function updateWeatherDisplay() {
 
 function updateWeather() {
     if (!weatherElement) return;
+
+    const weatherWidget = document.querySelector('.weather-widget');
     
     // If we already have weather data, just update the display
     if (weatherData) {
@@ -411,8 +413,15 @@ function updateWeather() {
             },
             (error) => {
                 console.error('Geolocation error:', error);
-                // Fallback to a default location (New York)
-                fetchWeatherData(40.7128, -74.0060);
+                // If user denies location access, hide the weather widget entirely
+                if (error && typeof error.code === 'number' && error.code === error.PERMISSION_DENIED) {
+                    if (weatherWidget) weatherWidget.style.display = 'none';
+                    weatherData = null;
+                    return;
+                }
+
+                // Other errors (timeout/unavailable): show unavailable but keep UI consistent
+                weatherElement.textContent = 'Weather unavailable';
             },
             {
                 timeout: 10000,
@@ -420,8 +429,8 @@ function updateWeather() {
             }
         );
     } else {
-        // Fallback if geolocation is not supported
-        weatherElement.textContent = 'Location not supported';
+        // If geolocation is not supported, hide the widget
+        if (weatherWidget) weatherWidget.style.display = 'none';
     }
 }
 
